@@ -6,7 +6,6 @@ package com.loconav.configurator.model;
 public class Machine {
 
     //private variables
-    private Integer machine_no;
     private String machine_name;
     private Integer total_msg;
 
@@ -15,21 +14,14 @@ public class Machine {
 
     }
     // constructor
-    public Machine(Integer machineNo, String machineName, Integer totalMsgs){
-        this.machine_no = machineNo;
+    public Machine(String machineName, Integer totalMsgs){
         this.machine_name = machineName;
         this.total_msg = totalMsgs;
     }
 
     // getting ID
-    public Integer getMachine_no(){
-        return this.machine_no;
-    }
 
     // setting id
-    public void setMachine_no(Integer number){
-        this.machine_no = number;
-    }
 
     // getting name
     public String getMachine_name(){

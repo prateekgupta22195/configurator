@@ -1,7 +1,7 @@
 package com.loconav.configurator.activity;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,12 +10,28 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
+import com.loconav.configurator.DeviceListAdapter;
+import com.loconav.configurator.MessageEvent;
 import com.loconav.configurator.application.BaseActivity;
 import com.loconav.configurator.R;
+import com.loconav.configurator.db.DeviceHelper;
+import com.loconav.configurator.model.Device;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    ListView deviceStatusListView;
+    ArrayList<Device> deviceList = new ArrayList<>();
+    DeviceListAdapter adapter ;
+    DeviceHelper deviceHelper;
 
     @Override
     public Integer setView() {return R.layout.activity_main;}
@@ -30,8 +46,8 @@ public class MainActivity extends BaseActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getBaseContext(), EnterDeviceInfo.class);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -42,7 +58,11 @@ public class MainActivity extends BaseActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        deviceHelper = new DeviceHelper();
+        deviceStatusListView = (ListView) findViewById(R.id.device_status_list);
+        deviceList.addAll(deviceHelper.getAllDevices());
+        adapter = new DeviceListAdapter(this, deviceList);
+        deviceStatusListView.setAdapter(adapter);
     }
 
     @Override
@@ -103,4 +123,39 @@ public class MainActivity extends BaseActivity
     }
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {/* Do something */
+//        bottomBar.selectTabAtPosition(event.getState());
+        if(event.getAction() == MessageEvent.Action.REFRESH_DEVICE_STATUS) {
+            refreshList();
+        }
+    }
+
+    private void refreshList() {
+        deviceList.clear();
+        deviceList.addAll(new DeviceHelper().getAllDevices());
+        adapter.notifyDataSetChanged();
+        // code to refresh data
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        if(resultCode == 1) {
+            refreshList();
+        }
+    }
 }

@@ -5,23 +5,25 @@ package com.loconav.configurator.model;
  */
 
 public class Device {
-    private Integer machine_no;
+    private String device_number;
     private String device_id;
     private Integer success_count;
-    private String type;
+    private String device_type;
+    private long timeStamp;
 
     public Device() {}
 
-    public Device(Integer machineNo, String cType, String deviceId,
-                  Integer successCount){
-        this.machine_no = machineNo;
+    public Device(String deviceNo, String cType, String deviceId,
+                  Integer successCount, long timeStamp){
+        this.device_number = deviceNo;
         this.device_id = deviceId;
         this.success_count = successCount;
-        this.type = cType;
+        this.device_type = cType;
+        this.timeStamp = timeStamp;
     }
 
-    public Integer getMachine_no() {
-        return machine_no;
+    public String getDevice_number() {
+        return device_number;
     }
 
     public String getDevice_id() {
@@ -32,12 +34,12 @@ public class Device {
         return success_count;
     }
 
-    public String getType() {
-        return type;
+    public String getDevice_type() {
+        return device_type;
     }
 
-    public void setMachine_no(Integer machine_no) {
-        this.machine_no = machine_no;
+    public void setDevice_number(String device_number) {
+        this.device_number = device_number;
     }
 
     public void setDevice_id(String device_id) {
@@ -48,7 +50,15 @@ public class Device {
         this.success_count = success_count;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDevice_type(String device_type) {
+        this.device_type = device_type;
+    }
+
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
     }
 }

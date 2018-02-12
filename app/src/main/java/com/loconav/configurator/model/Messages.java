@@ -7,15 +7,15 @@ package com.loconav.configurator.model;
 public class Messages {
     private Integer MSG_NO;
     private String MSG_TEXT;
-    private Integer MACHINE_NO;
+    private String MACHINE_TYPE;
 
     public Messages(){
 
     }
-    public Messages(Integer msgNo, String msgText, Integer machineNo){
+    public Messages(Integer msgNo, String msgText, String machineType){
         this.MSG_NO = msgNo;
         this.MSG_TEXT = msgText;
-        this.MACHINE_NO = machineNo;
+        this.MACHINE_TYPE = machineType;
     }
 
     public void setMSG_NO(Integer MSG_NO) {
@@ -26,12 +26,11 @@ public class Messages {
         this.MSG_TEXT = MSG_TEXT;
     }
 
-    public void setMACHINE_NO(Integer MACHINE_NO) {
-        this.MACHINE_NO = MACHINE_NO;
+    public void setMACHINE_TYPE(String machineType) {
+        this.MACHINE_TYPE = machineType;
     }
 
     public Integer getMSG_NO() {
-
         return MSG_NO;
     }
 
@@ -39,7 +38,7 @@ public class Messages {
         return MSG_TEXT;
     }
 
-    public Integer getMACHINE_NO() {
-        return MACHINE_NO;
+    public String  getMACHINE_NO() {
+        return MACHINE_TYPE;
     }
 }
