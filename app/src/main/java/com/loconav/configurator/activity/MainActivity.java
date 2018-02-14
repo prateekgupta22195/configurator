@@ -18,6 +18,7 @@ import com.loconav.configurator.application.BaseActivity;
 import com.loconav.configurator.R;
 import com.loconav.configurator.db.DeviceHelper;
 import com.loconav.configurator.model.Device;
+import com.loconav.lookup.LookUpEntry;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -153,7 +154,7 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId()==R.id.action_search_device) {
-            Intent i = new Intent(getApplicationContext(), SearchDevice.class);
+            Intent i = new Intent(getApplicationContext(), LookUpEntry.class);
             startActivity(i);
             return true;
         }

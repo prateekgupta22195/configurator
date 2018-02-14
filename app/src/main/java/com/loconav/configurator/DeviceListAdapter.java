@@ -14,10 +14,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.loconav.configurator.activity.LookUp;
 import com.loconav.configurator.activity.MainActivity;
 import com.loconav.configurator.db.DeviceHelper;
 import com.loconav.configurator.model.Device;
+import com.loconav.lookup.MainActivity3;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -78,7 +78,8 @@ public class DeviceListAdapter extends ArrayAdapter<Device> {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(getContext(), LookUp.class);
+                    Intent intent = new Intent(getContext(), MainActivity3.class);
+                    intent.putExtra("message", device.getDevice_id());
                     getContext().startActivity(intent);
                 }
             });
