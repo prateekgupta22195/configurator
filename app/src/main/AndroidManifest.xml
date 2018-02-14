@@ -32,7 +32,7 @@
         <activity android:name=".activity.SelectMachine" />
         <activity
             android:name=".activity.EnterDeviceInfo"
-            android:label="Select Machine Type"></activity>
+            android:label="Select Machine Type" />
 
         <receiver android:name=".SmsReceiver">
             <intent-filter>
@@ -40,7 +40,10 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.LookUp"></activity>
+        <activity android:name=".activity.LookUp" />
+        <activity android:name=".activity.ShareDetails" />
+        <activity android:name=".activity.EnterDetails" />
+        <activity android:name=".activity.SearchDevice"></activity>
     </application>
 
 </manifest>

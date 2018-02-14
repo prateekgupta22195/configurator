@@ -37,32 +37,35 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                if(deviceNumber.getText().toString()!=null || !deviceNumber.getText().toString().equals("")) {
+                if(!deviceNumber.getText().toString().equals("")) {
                     String number = deviceNumber.getText().toString();
                     String dbNumber = "+91"+number;
                     Device device = new Device();
                     device.setTimeStamp(System.currentTimeMillis());
-                    device.setSuccess_count(0);
+                    device.setSuccess_count(-1);
                     device.setDevice_number(dbNumber);
                     device.setDevice_type(selectDevice.getSelectedItem().toString());
                     device.setDevice_id("");
                     deviceHelper.createOrUpdateDevice(device);
-                    String messageToSend;
-                    if(device.getDevice_type() == "TK101B") {
-                        messageToSend = "Number0" + device.getDevice_number().substring(3);
-                    } else {
-                        messageToSend = machineMessages.get(device.getDevice_type()).get(device.getSuccess_count());
-                    }
-                    if(messageToSend!= null) {
-                        sms.sendTextMessage(device.getDevice_number(), null, messageToSend,
-                                null, null);
-                    }
+                    String msgToSetDeviceID = getMsgToSetDeviceId(device);
+                    sms.sendTextMessage(device.getDevice_number(), null,msgToSetDeviceID,
+                            null, null);
                     setResult(1);
                     finish();
                 } else
                     Toast.makeText(getBaseContext(), "Please Enter Device Id", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private String getMsgToSetDeviceId(Device device) {
+        String msgToSetDeviceID = "";
+        if(device.getDevice_type().equals("TK101B")) {
+            msgToSetDeviceID = "Number0" + device.getDevice_number().substring(3);
+        } else {
+            msgToSetDeviceID = "param#";
+        }
+        return msgToSetDeviceID;
     }
 
     private void setSelectDeviceSpinner() {

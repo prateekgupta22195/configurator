@@ -32,6 +32,7 @@ public class MainActivity extends BaseActivity
     ArrayList<Device> deviceList = new ArrayList<>();
     DeviceListAdapter adapter ;
     DeviceHelper deviceHelper;
+    private Toolbar toolbar;
 
     @Override
     public Integer setView() {return R.layout.activity_main;}
@@ -39,7 +40,7 @@ public class MainActivity extends BaseActivity
     @Override
     public void activityCreated() {
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -50,14 +51,7 @@ public class MainActivity extends BaseActivity
                 startActivityForResult(intent, 1);
             }
         });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+//        setNavigationMenu();
         deviceHelper = new DeviceHelper();
         deviceStatusListView = (ListView) findViewById(R.id.device_status_list);
         deviceList.addAll(deviceHelper.getAllDevices());
@@ -75,27 +69,7 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -157,5 +131,32 @@ public class MainActivity extends BaseActivity
         if(resultCode == 1) {
             refreshList();
         }
+    }
+
+    private void setNavigationMenu() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId()==R.id.action_search_device) {
+            Intent i = new Intent(getApplicationContext(), SearchDevice.class);
+            startActivity(i);
+            return true;
+        }
+        return false;
     }
 }
