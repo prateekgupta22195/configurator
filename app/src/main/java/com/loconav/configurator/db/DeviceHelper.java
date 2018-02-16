@@ -23,6 +23,7 @@ public class DeviceHelper extends DBHelper {
     private static final String KEY_DEVICE_ID = "device_id";
     private static final String KEY_SUCCESS_COUNT = "success_count";
     private static final String KEY_TIMESTAMP = "timestamp";
+    private static final String KEY_SIM_TYPE = "sim_type";
 
     public DeviceHelper() {
         super();
@@ -30,12 +31,14 @@ public class DeviceHelper extends DBHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_DEVICE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_DEVICE + "("
+        String CREATE_DEVICE_TABLE = "CREATE TABLE " + TABLE_DEVICE + "("
                 + KEY_DEVICE_NO + " TEXT,"
                 + KEY_TIMESTAMP + " INTEGER,"
                 + KEY_MACHINE_TYPE + " TEXT,"
                 + KEY_DEVICE_ID + " TEXT,"
-                + KEY_SUCCESS_COUNT + " INTEGER" + ")";
+                + KEY_SUCCESS_COUNT + " INTEGER,"
+                + KEY_SIM_TYPE + " TEXT"
+                + ")";
         db.execSQL(CREATE_DEVICE_TABLE);
     }
 
@@ -43,8 +46,7 @@ public class DeviceHelper extends DBHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
-//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DEVICE);
-
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DEVICE);
         // Create tables again
         onCreate(db);
     }
@@ -59,6 +61,7 @@ public class DeviceHelper extends DBHelper {
             values.put(KEY_SUCCESS_COUNT, device.getSuccess_count());
             values.put(KEY_DEVICE_ID, device.getDevice_id());
             values.put(KEY_TIMESTAMP, device.getTimeStamp());
+            values.put(KEY_SIM_TYPE, device.getSimType());
             db.insert(TABLE_DEVICE, null, values);
             db.close();
         } else
@@ -70,14 +73,20 @@ public class DeviceHelper extends DBHelper {
     public Device getDevice(String deviceNumber) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_DEVICE, new String[] { KEY_DEVICE_NO,
-                        KEY_MACHINE_TYPE, KEY_DEVICE_ID, KEY_SUCCESS_COUNT , KEY_TIMESTAMP}, KEY_DEVICE_NO + "=?",
+        Cursor cursor = db.query(TABLE_DEVICE, new String[]{
+                KEY_DEVICE_NO,
+                KEY_MACHINE_TYPE,
+                KEY_DEVICE_ID,
+                KEY_SUCCESS_COUNT,
+                KEY_TIMESTAMP,
+                KEY_SIM_TYPE
+                }, KEY_DEVICE_NO + "=?",
                 new String[] { deviceNumber }, null, null, null, null);
         Log.e("cursor count ", cursor.getCount() + "");
         if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             Device device= new Device((cursor.getString(0)),
-                    cursor.getString(1), cursor.getString(2), cursor.getInt(3) , cursor.getLong(4));
+                    cursor.getString(1), cursor.getString(2), cursor.getInt(3) , cursor.getLong(4), cursor.getString(5));
             return device;
         } else {
             return null;
@@ -103,16 +112,18 @@ public class DeviceHelper extends DBHelper {
                 device.setDevice_type(cursor.getString(2));
                 device.setDevice_id(cursor.getString(3));
                 device.setSuccess_count((cursor.getInt(4)));
+                device.setSimType(cursor.getString(5));
                 // Adding contact to list
                 devicesList.add(device);
             } while (cursor.moveToNext());
         }
+        cursor.close();
         // return contact list
         return devicesList;
     }
 
     // Updating single contact
-    public int updateDevice(Device device) {
+    public void updateDevice(Device device) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_DEVICE_NO, device.getDevice_number());
@@ -120,8 +131,9 @@ public class DeviceHelper extends DBHelper {
         values.put(KEY_SUCCESS_COUNT, device.getSuccess_count());
         values.put(KEY_DEVICE_ID, device.getDevice_id());
         values.put(KEY_TIMESTAMP, System.currentTimeMillis());
+        values.put(KEY_SIM_TYPE, device.getSimType());
         // updating row
-        return db.update(TABLE_DEVICE, values, KEY_DEVICE_NO + " = ?",
+        db.update(TABLE_DEVICE, values, KEY_DEVICE_NO + " = ?",
                 new String[] { device.getDevice_number() });
     }
 
@@ -133,32 +145,6 @@ public class DeviceHelper extends DBHelper {
         db.close();
     }
     // Getting contacts Count
-    public int getDeviceCount() {
-        String countQuery = "SELECT  * FROM " + TABLE_DEVICE;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
-        cursor.close();
-        // return count
-        return cursor.getCount();
-    }
 
-    public Device getLatestDevice() {
-        Device device = new Device();
-        String selectQuery = "SELECT  * FROM " + TABLE_DEVICE + " ORDER BY "+ KEY_TIMESTAMP + " DESC";
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        cursor.moveToFirst();
-        if(cursor.getCount()>0) {
-            device.setDevice_number((cursor.getString(0)));
-            device.setTimeStamp(cursor.getLong(1));
-            device.setDevice_type(cursor.getString(2));
-            device.setDevice_id(cursor.getString(3));
-            device.setSuccess_count((cursor.getInt(4)));
-        }
-        // Adding contact to list
-        return device;
-    }
 
 }

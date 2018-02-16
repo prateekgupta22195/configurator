@@ -19,7 +19,9 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.loconav.configurator.Constants.SIM_TYPE;
 import static com.loconav.configurator.MessagesList.machineMessages;
+import static com.loconav.configurator.application.AppController.editor;
 
 /**
  * Created by prateek on 10/02/18.
@@ -28,6 +30,16 @@ public class SmsReceiver extends BroadcastReceiver {
     int p;
     String machine;
     private static final String TAG = "SmsReceiver";
+
+    public static String getSimType() {
+        return simType;
+    }
+
+    public static void setSimType(String simType) {
+        SmsReceiver.simType = simType;
+    }
+
+    private static String simType;
     @Override
     public void onReceive(Context arg0, Intent arg1) {
         try {
@@ -40,6 +52,7 @@ public class SmsReceiver extends BroadcastReceiver {
                 String message = currentMessage.getDisplayMessageBody();
                 Log.d("SmsReceiver","Message Received: " + message);
                 Device device = getDeviceByNumber(phoneNumber);
+                setSimType(device.getSimType());
                 if(device.getSuccess_count() == -1) {
                     retrieveAndSetDeviceID(message, device);
                     sendMessage(phoneNumber, machineMessages.get(device.getDevice_type()).get(0));
@@ -68,6 +81,10 @@ public class SmsReceiver extends BroadcastReceiver {
         }
     }
 
+    private void setSim(Device device) {
+        editor.putString(SIM_TYPE, device.getSimType());
+        editor.commit();
+    }
 
     static void retrieveAndSetDeviceID (String message, Device device) {
             if(device.getDevice_type().equals("TK101B")) {

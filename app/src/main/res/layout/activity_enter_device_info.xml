@@ -4,14 +4,29 @@
     android:layout_height="match_parent"
     tools:context=".activity.EnterDeviceInfo" >
 
-    <Spinner
-        android:id="@+id/select_device"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:id="@+id/linearLayout">
 
-    </Spinner>
+        <Spinner
+            android:id="@+id/select_device"
+            android:layout_width="wrap_content"
+            android:gravity="end"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+        <Spinner
+            android:id="@+id/select_sim"
+            android:layout_width="wrap_content"
+            android:gravity="end"
+            android:layout_height="wrap_content">
+        </Spinner>
+    </LinearLayout>
+
 
 
     <Button
@@ -30,9 +45,9 @@
         android:id="@+id/et_device_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/select_device"
+        android:layout_above="@+id/linearLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="27dp"
         android:ems="10"
         android:focusable="true"
         android:focusableInTouchMode="true"

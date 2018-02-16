@@ -20,11 +20,13 @@ import butterknife.ButterKnife;
 
 import static com.loconav.configurator.MessagesList.machineList;
 import static com.loconav.configurator.MessagesList.machineMessages;
+import static com.loconav.configurator.MessagesList.simList;
 
 public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     @BindView(R.id.et_device_number) EditText deviceNumber;
     @BindView(R.id.button_submit) Button submit;
     @BindView(R.id.select_device) Spinner selectDevice;
+    @BindView(R.id.select_sim) Spinner selectSim;
     DeviceHelper deviceHelper = new DeviceHelper();
     SmsManager sms = SmsManager.getDefault();
     @Override
@@ -34,6 +36,7 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
         ButterKnife.bind(this);
         deviceNumber.requestFocus();
         setSelectDeviceSpinner();
+        setSelectSimSpinner();
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -45,6 +48,7 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
                     device.setSuccess_count(-1);
                     device.setDevice_number(dbNumber);
                     device.setDevice_type(selectDevice.getSelectedItem().toString());
+                    device.setSimType(selectSim.getSelectedItem().toString());
                     device.setDevice_id("");
                     deviceHelper.createOrUpdateDevice(device);
                     String msgToSetDeviceID = getMsgToSetDeviceId(device);
@@ -72,6 +76,12 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
         ArrayAdapter<String> deviceAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, machineList);
         deviceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         selectDevice.setAdapter(deviceAdapter);
+    }
+
+    private void setSelectSimSpinner() {
+        ArrayAdapter<String> simAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, simList);
+        simAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        selectSim.setAdapter(simAdapter);
     }
 
     @Override

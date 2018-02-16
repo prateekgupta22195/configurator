@@ -11,15 +11,18 @@ public class Device {
     private String device_type;
     private long timeStamp;
 
+    private String simType;
+
     public Device() {}
 
     public Device(String deviceNo, String cType, String deviceId,
-                  Integer successCount, long timeStamp){
+                  Integer successCount, long timeStamp, String simType){
         this.device_number = deviceNo;
         this.device_id = deviceId;
         this.success_count = successCount;
         this.device_type = cType;
         this.timeStamp = timeStamp;
+        this.simType = simType;
     }
 
     public String getDevice_number() {
@@ -60,5 +63,13 @@ public class Device {
 
     public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public String getSimType() {
+        return simType;
+    }
+
+    public void setSimType(String simType) {
+        this.simType = simType;
     }
 }

@@ -160,4 +160,10 @@ public class MainActivity extends BaseActivity
         }
         return false;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshList();
+    }
 }
