@@ -29,17 +29,11 @@ import static com.loconav.configurator.application.AppController.editor;
 public class SmsReceiver extends BroadcastReceiver {
     int p;
     String machine;
+    private static String simType;
+
     private static final String TAG = "SmsReceiver";
 
-    public static String getSimType() {
-        return simType;
-    }
 
-    public static void setSimType(String simType) {
-        SmsReceiver.simType = simType;
-    }
-
-    private static String simType;
     @Override
     public void onReceive(Context arg0, Intent arg1) {
         try {
@@ -52,28 +46,29 @@ public class SmsReceiver extends BroadcastReceiver {
                 String message = currentMessage.getDisplayMessageBody();
                 Log.d("SmsReceiver","Message Received: " + message);
                 Device device = getDeviceByNumber(phoneNumber);
-                setSimType(device.getSimType());
-                if(device.getSuccess_count() == -1) {
-                    retrieveAndSetDeviceID(message, device);
-                    sendMessage(phoneNumber, machineMessages.get(device.getDevice_type()).get(0));
-                } else  {
-                    String msgTosend = messageToSend(device.getDevice_type(), device.getSuccess_count()+2);
-                    Log.e("expected msg ", machineMessages.get(device.getDevice_type()).get(device.getSuccess_count()+1));
-                    Log.e("original msg ", message);
+                if(device!=null) {
+                    setSimType(device.getSimType());
+                    updateMessagesList(device);
+                    if(device.getSuccess_count() == -1) {
+                        retrieveAndSetDeviceID(message, device);
+                        sendMessage(phoneNumber, machineMessages.get(device.getDevice_type()).get(0));
+                    } else  {
+                        String msgTosend = messageToSend(device.getDevice_type(), device.getSuccess_count()+2);
+                        Log.e("expected msg ", machineMessages.get(device.getDevice_type()).get(device.getSuccess_count()+1));
+                        Log.e("original msg ", message);
 
-                    if(isMatchFound(message,machineMessages.get(device.getDevice_type()).get(device.getSuccess_count()+1))) {
-                        int finalStatus = device.getSuccess_count()+2;
-                        device.setSuccess_count(finalStatus);
-                        new DeviceHelper().updateDevice(device);
-                        if(!msgTosend.equals("") ) {
-                            sendMessage(phoneNumber, msgTosend);
+                        if(isMatchFound(message,machineMessages.get(device.getDevice_type()).get(device.getSuccess_count()+1))) {
+                            int finalStatus = device.getSuccess_count()+2;
+                            device.setSuccess_count(finalStatus);
+                            new DeviceHelper().updateDevice(device);
+                            if(!msgTosend.equals("") ) {
+                                sendMessage(phoneNumber, msgTosend);
+                            }
                         }
                     }
-
-
+                    notifyStatusList();
+                    Log.e(TAG, " final status "+  new DeviceHelper().getDevice(phoneNumber).getSuccess_count());
                 }
-                notifyStatusList();
-                Log.e(TAG, " final status "+  new DeviceHelper().getDevice(phoneNumber).getSuccess_count());
             }
         }
         catch (Exception e) {
@@ -81,10 +76,11 @@ public class SmsReceiver extends BroadcastReceiver {
         }
     }
 
-    private void setSim(Device device) {
+    private void updateMessagesList(Device device) {
         editor.putString(SIM_TYPE, device.getSimType());
         editor.commit();
     }
+
 
     static void retrieveAndSetDeviceID (String message, Device device) {
             if(device.getDevice_type().equals("TK101B")) {
@@ -136,7 +132,13 @@ public class SmsReceiver extends BroadcastReceiver {
             return false;
     }
 
+    public static String getSimType() {
+        return simType;
+    }
 
+    public static void setSimType(String simType) {
+        SmsReceiver.simType = simType;
+    }
 
 
 }
