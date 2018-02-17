@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
 
 import static com.loconav.configurator.Constants.SIM_TYPE;
 import static com.loconav.configurator.MessagesList.machineMessages;
+import static com.loconav.configurator.MessagesList.makeMachineMessages;
 import static com.loconav.configurator.application.AppController.editor;
 
 /**
@@ -29,7 +30,7 @@ import static com.loconav.configurator.application.AppController.editor;
 public class SmsReceiver extends BroadcastReceiver {
     int p;
     String machine;
-    private static String simType;
+    public static String simType = "airtelgprs.com";
 
     private static final String TAG = "SmsReceiver";
 
@@ -47,11 +48,12 @@ public class SmsReceiver extends BroadcastReceiver {
                 Log.d("SmsReceiver","Message Received: " + message);
                 Device device = getDeviceByNumber(phoneNumber);
                 if(device!=null) {
-                    setSimType(device.getSimType());
-                    updateMessagesList(device);
+                    simType = device.getSimType();
                     if(device.getSuccess_count() == -1) {
                         retrieveAndSetDeviceID(message, device);
-                        sendMessage(phoneNumber, machineMessages.get(device.getDevice_type()).get(0));
+                        if(device.getSuccess_count() == 0) {
+                            sendMessage(phoneNumber, machineMessages.get(device.getDevice_type()).get(0));
+                        }
                     } else  {
                         String msgTosend = messageToSend(device.getDevice_type(), device.getSuccess_count()+2);
                         Log.e("expected msg ", machineMessages.get(device.getDevice_type()).get(device.getSuccess_count()+1));
@@ -76,9 +78,8 @@ public class SmsReceiver extends BroadcastReceiver {
         }
     }
 
-    private void updateMessagesList(Device device) {
-        editor.putString(SIM_TYPE, device.getSimType());
-        editor.commit();
+    private void updateMachineMessages() {
+        makeMachineMessages();
     }
 
 
