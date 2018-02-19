@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Map;
 
+import static com.loconav.lookup.Constants.DEVICE_ID;
+
 
 /**
  * Created by prateek on 10/02/18.
@@ -82,7 +84,7 @@ public class DeviceListAdapter extends ArrayAdapter<Device> {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(getContext(), MainActivity3.class);
-                    intent.putExtra("message", device.getDevice_id());
+                    intent.putExtra(DEVICE_ID, device.getDevice_id());
                     getContext().startActivity(intent);
                 }
             });
