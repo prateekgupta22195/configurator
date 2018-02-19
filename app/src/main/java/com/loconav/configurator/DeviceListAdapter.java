@@ -23,8 +23,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import static com.loconav.configurator.MessagesList.machineMessages;
+import java.util.Map;
 
 
 /**
@@ -34,8 +33,11 @@ public class DeviceListAdapter extends ArrayAdapter<Device> {
 
     private SmsManager sms;
     private DeviceHelper deviceHelper = new DeviceHelper();
+    public static Map<String , Map<Integer, String>> machineMessages;
+
     public DeviceListAdapter(MainActivity mainActivity, ArrayList<Device> users) {
         super(mainActivity, 0, users);
+        machineMessages = new MessagesList().getMachineMessages();
     }
 
     @Override

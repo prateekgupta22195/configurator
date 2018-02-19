@@ -1,9 +1,11 @@
 package com.loconav.configurator.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.loconav.configurator.MessagesList;
 import com.loconav.configurator.R;
 import com.loconav.configurator.db.DeviceHelper;
 import com.loconav.configurator.model.Device;
@@ -18,9 +21,6 @@ import com.loconav.configurator.model.Device;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.loconav.configurator.MessagesList.machineList;
-import static com.loconav.configurator.MessagesList.machineMessages;
-import static com.loconav.configurator.MessagesList.simList;
 
 public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     @BindView(R.id.et_device_number) EditText deviceNumber;
@@ -29,12 +29,13 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
     @BindView(R.id.select_sim) Spinner selectSim;
     DeviceHelper deviceHelper = new DeviceHelper();
     SmsManager sms = SmsManager.getDefault();
+    MessagesList messagesList ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_device_info);
         ButterKnife.bind(this);
-        deviceNumber.requestFocus();
+        messagesList = new MessagesList();
         setSelectDeviceSpinner();
         setSelectSimSpinner();
         submit.setOnClickListener(new View.OnClickListener() {
@@ -73,13 +74,13 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
     }
 
     private void setSelectDeviceSpinner() {
-        ArrayAdapter<String> deviceAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, machineList);
+        ArrayAdapter<String> deviceAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, messagesList.machineList);
         deviceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         selectDevice.setAdapter(deviceAdapter);
     }
 
     private void setSelectSimSpinner() {
-        ArrayAdapter<String> simAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, simList);
+        ArrayAdapter<String> simAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, messagesList.simList);
         simAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         selectSim.setAdapter(simAdapter);
     }

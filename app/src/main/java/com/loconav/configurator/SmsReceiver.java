@@ -16,12 +16,11 @@ import com.loconav.configurator.model.Machine;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.loconav.configurator.Constants.SIM_TYPE;
-import static com.loconav.configurator.MessagesList.machineMessages;
-import static com.loconav.configurator.MessagesList.makeMachineMessages;
 import static com.loconav.configurator.application.AppController.editor;
 
 /**
@@ -33,6 +32,7 @@ public class SmsReceiver extends BroadcastReceiver {
     public static String simType = "airtelgprs.com";
 
     private static final String TAG = "SmsReceiver";
+    public static Map<String , Map<Integer, String>> machineMessages;
 
 
     @Override
@@ -49,6 +49,7 @@ public class SmsReceiver extends BroadcastReceiver {
                 Device device = getDeviceByNumber(phoneNumber);
                 if(device!=null) {
                     simType = device.getSimType();
+                    machineMessages = new MessagesList().getMachineMessages();
                     if(device.getSuccess_count() == -1) {
                         retrieveAndSetDeviceID(message, device);
                         if(device.getSuccess_count() == 0) {
@@ -76,10 +77,6 @@ public class SmsReceiver extends BroadcastReceiver {
         catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void updateMachineMessages() {
-        makeMachineMessages();
     }
 
 
