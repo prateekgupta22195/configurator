@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 
 import com.facebook.stetho.Stetho;
 import com.loconav.configurator.db.DBHelper;
+import com.loconav.lookup.application.LookUpApplication;
 
 import static com.loconav.configurator.Constants.LOOK_UP_PREFERENCES;
 
@@ -13,7 +14,7 @@ import static com.loconav.configurator.Constants.LOOK_UP_PREFERENCES;
  * Created by prateek on 28/11/17.
  */
 
-public class AppController extends Application {
+public class AppController extends LookUpApplication {
     public static Context appContext;
     public static SharedPreferences sharedPreferences;
     public static SharedPreferences.Editor editor;
