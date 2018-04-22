@@ -29,7 +29,6 @@ import static com.loconav.configurator.application.AppController.editor;
 public class SmsReceiver extends BroadcastReceiver {
     int p;
     String machine;
-    public static String simType = "airtelgprs.com";
 
     private static final String TAG = "SmsReceiver";
     public static Map<String , Map<Integer, String>> machineMessages;
@@ -38,6 +37,7 @@ public class SmsReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context arg0, Intent arg1) {
         try {
+            MessagesList messagesList = new MessagesList();
             final Bundle bundle = arg1.getExtras();
             if (bundle != null) {
                 final Object[] pdusObj = (Object[]) bundle.get("pdus");
@@ -47,30 +47,28 @@ public class SmsReceiver extends BroadcastReceiver {
                 String message = currentMessage.getDisplayMessageBody();
                 Log.d("SmsReceiver","Message Received: " + message);
                 Device device = getDeviceByNumber(phoneNumber);
-                if(device!=null) {
-                    simType = device.getSimType();
-                    machineMessages = new MessagesList().getMachineMessages();
-                    if(device.getSuccess_count() == -1) {
+                if(device != null) {
+                    String deviceType = device.getDevice_type();
+                    int status = device.getSuccess_count();
+                    messagesList.setSimType(device.getSimType());
+                    machineMessages = messagesList.getMachineMessages();
+                    if(status == -1) {
                         retrieveAndSetDeviceID(message, device);
                         if(device.getSuccess_count() == 0) {
-                            sendMessage(phoneNumber, machineMessages.get(device.getDevice_type()).get(0));
+                            sendMessage(phoneNumber, machineMessages.get(deviceType).get(0));
+                            incrementDeviceStatus(device);
                         }
-                    } else  {
-                        String msgTosend = messageToSend(device.getDevice_type(), device.getSuccess_count()+2);
-                        Log.e("expected msg ", machineMessages.get(device.getDevice_type()).get(device.getSuccess_count()+1));
-                        Log.e("original msg ", message);
-
-                        if(isMatchFound(message,machineMessages.get(device.getDevice_type()).get(device.getSuccess_count()+1))) {
-                            int finalStatus = device.getSuccess_count()+2;
-                            device.setSuccess_count(finalStatus);
-                            new DeviceHelper().updateDevice(device);
-                            if(!msgTosend.equals("") ) {
+                    } else {
+                        if(isMatchFound(message, machineMessages.get(deviceType).get(status))) {
+                            incrementDeviceStatus(device);
+                            String msgTosend = messageToSend(device.getDevice_type(),status+1);
+                            if(!msgTosend.equals("")) {
                                 sendMessage(phoneNumber, msgTosend);
+                                incrementDeviceStatus(device);
                             }
                         }
                     }
                     notifyStatusList();
-                    Log.e(TAG, " final status "+  new DeviceHelper().getDevice(phoneNumber).getSuccess_count());
                 }
             }
         }
@@ -83,14 +81,23 @@ public class SmsReceiver extends BroadcastReceiver {
     static void retrieveAndSetDeviceID (String message, Device device) {
             if(device.getDevice_type().equals("TK101B")) {
                 device.setDevice_id("00"+ device.getDevice_number().substring(3));
-                device.setSuccess_count(0);
+                device.setSuccess_count(device.getSuccess_count()+1);
                 new DeviceHelper().updateDevice(device);
-            } else {
+            } else if (device.getDevice_type().equals("MT05(top10)")) {
+                Pattern p = Pattern.compile("(\\d{14})");
+                Matcher m = p.matcher(message); // get a matcher object
+                if(m.find()) {
+                    device.setDevice_id(m.group(1));
+                    device.setSuccess_count(device.getSuccess_count()+1);
+                    new DeviceHelper().updateDevice(device);
+                }
+            }
+            else {
                 Pattern p = Pattern.compile("(\\d{15})");
                 Matcher m = p.matcher(message); // get a matcher object
                 if(m.find()) {
                     device.setDevice_id("0"+m.group(1));
-                    device.setSuccess_count(0);
+                    device.setSuccess_count(device.getSuccess_count()+1);
                     new DeviceHelper().updateDevice(device);
                 }
             }
@@ -122,7 +129,9 @@ public class SmsReceiver extends BroadcastReceiver {
     }
 
     private boolean isMatchFound(String receivedMessage, String matchWith) {
+        matchWith = matchWith.toLowerCase();
         Pattern p = Pattern.compile(matchWith);
+        receivedMessage = receivedMessage.toLowerCase();
         Matcher m = p.matcher(receivedMessage); // get a matcher object
         if(m.find()) {
             return true;
@@ -130,13 +139,10 @@ public class SmsReceiver extends BroadcastReceiver {
             return false;
     }
 
-    public static String getSimType() {
-        return simType;
+    private void incrementDeviceStatus(Device device){
+        int newStatus = device.getSuccess_count();
+        device.setSuccess_count(++newStatus);
+        new DeviceHelper().updateDevice(device);
     }
-
-    public static void setSimType(String simType) {
-        SmsReceiver.simType = simType;
-    }
-
 
 }

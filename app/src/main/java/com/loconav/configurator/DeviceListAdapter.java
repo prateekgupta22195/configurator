@@ -35,11 +35,12 @@ public class DeviceListAdapter extends ArrayAdapter<Device> {
 
     private SmsManager sms;
     private DeviceHelper deviceHelper = new DeviceHelper();
-    public static Map<String , Map<Integer, String>> machineMessages;
+    public Map<String , Map<Integer, String>> machineMessages;
+    private  MessagesList messagesList;
 
     public DeviceListAdapter(MainActivity mainActivity, ArrayList<Device> users) {
         super(mainActivity, 0, users);
-        machineMessages = new MessagesList().getMachineMessages();
+        messagesList = new MessagesList();
     }
 
     @Override
@@ -73,6 +74,9 @@ public class DeviceListAdapter extends ArrayAdapter<Device> {
 
         deviceNumber.setText(device.getDevice_number().toString());
         deviceType.setText(device.getDevice_type());
+        messagesList.setSimType(device.getSimType());
+        machineMessages = messagesList.getMachineMessages();
+
         time.setText(hour + ":" + minute + " " + am_pm);
 //        txtTitle2.setText(machineName + "      " + statusPercentageString + "%");
 
@@ -105,8 +109,8 @@ public class DeviceListAdapter extends ArrayAdapter<Device> {
                     sms.sendTextMessage(device.getDevice_number(), null,getMsgToSetDeviceId(device),
                             null, null);
                 }else if(device.getSuccess_count() < machineMessages.get(device.getDevice_type()).size()) {
-                    sms.sendTextMessage(device.getDevice_number(), null,
-                            machineMessages.get(device.getDevice_type()).get(device.getSuccess_count()), null, null);
+                    sms.sendTextMessage(device.getDevice_number(), null,messageToSend(device.getDevice_type(),
+                            device.getSuccess_count()-1), null, null);
                     Toast.makeText(getContext(), "Message Resent", Toast.LENGTH_LONG).show();
                 }
 
@@ -130,11 +134,19 @@ public class DeviceListAdapter extends ArrayAdapter<Device> {
         String msgToSetDeviceID = "";
         if(device.getDevice_type().equals("TK101B")) {
             msgToSetDeviceID = "Number0" + device.getDevice_number().substring(3);
+        } else if(device.getDevice_type().equals("MT05(top10)")) {
+            msgToSetDeviceID = "111111WWW:IPN:52.33.252.113;COM:5678;";
         } else {
             msgToSetDeviceID = "param#";
         }
         return msgToSetDeviceID;
     }
 
-
+    private String messageToSend (String deviceType, int messageNumber) {
+        String messageToSend = "";
+        if(messageNumber < machineMessages.get(deviceType).size()) {
+            messageToSend = machineMessages.get(deviceType).get(messageNumber);
+        }
+        return messageToSend;
+    }
 }
