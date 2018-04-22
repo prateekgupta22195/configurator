@@ -1,5 +1,6 @@
 package com.loconav.configurator;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
@@ -17,7 +18,6 @@ import android.widget.Toast;
 import com.loconav.configurator.activity.MainActivity;
 import com.loconav.configurator.db.DeviceHelper;
 import com.loconav.configurator.model.Device;
-import com.loconav.lookup.MainActivity3;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Map;
 
-import static com.loconav.lookup.Constants.DEVICE_ID;
+import static com.loconav.configurator.Constants.DEVICE_ID;
 
 
 /**
@@ -38,8 +38,8 @@ public class DeviceListAdapter extends ArrayAdapter<Device> {
     public Map<String , Map<Integer, String>> machineMessages;
     private  MessagesList messagesList;
 
-    public DeviceListAdapter(MainActivity mainActivity, ArrayList<Device> users) {
-        super(mainActivity, 0, users);
+    public DeviceListAdapter(Context context, ArrayList<Device> users) {
+        super(context, 0, users);
         messagesList = new MessagesList();
     }
 

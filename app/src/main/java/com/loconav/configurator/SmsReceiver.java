@@ -3,25 +3,19 @@ package com.loconav.configurator;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.loconav.configurator.db.DeviceHelper;
 import com.loconav.configurator.model.Device;
-import com.loconav.configurator.model.Machine;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.loconav.configurator.Constants.SIM_TYPE;
-import static com.loconav.configurator.application.AppController.editor;
 
 /**
  * Created by prateek on 10/02/18.

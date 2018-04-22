@@ -13,12 +13,12 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.loconav.configurator.DeviceListAdapter;
+import com.loconav.configurator.LookUpEntry;
 import com.loconav.configurator.MessageEvent;
-import com.loconav.configurator.application.BaseActivity;
+import com.loconav.configurator.app.BaseActivity;
 import com.loconav.configurator.R;
 import com.loconav.configurator.db.DeviceHelper;
 import com.loconav.configurator.model.Device;
-import com.loconav.lookup.LookUpEntry;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity
 //        setNavigationMenu();
         deviceHelper = new DeviceHelper();
         deviceStatusListView = (ListView) findViewById(R.id.device_status_list);
-        deviceList.addAll(deviceHelper.getAllDevices());
+        deviceList.addAll(deviceHelper.getAllDevices("ACTIVE"));
         adapter = new DeviceListAdapter(this, deviceList);
         deviceStatusListView.setAdapter(adapter);
     }
@@ -120,7 +120,7 @@ public class MainActivity extends BaseActivity
 
     private void refreshList() {
         deviceList.clear();
-        deviceList.addAll(new DeviceHelper().getAllDevices());
+        deviceList.addAll(new DeviceHelper().getAllDevices("ACTIVE"));
         adapter.notifyDataSetChanged();
         // code to refresh data
     }

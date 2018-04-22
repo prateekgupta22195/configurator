@@ -1,11 +1,8 @@
 package com.loconav.configurator;
 
-import android.content.ContentProvider;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 import android.telephony.gsm.GsmCellLocation;
-
-import com.loconav.configurator.application.BaseActivity;
 
 import static android.content.Context.TELEPHONY_SERVICE;
 
