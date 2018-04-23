@@ -181,6 +181,7 @@ public class MainActivity3 extends AppCompatActivity {
 			Device device = new DeviceHelper().getDeviceByID(message);
 			device.setDeviceStatus("DONE");
 			new DeviceHelper().updateDevice(device);
+			Toast.makeText(this, "Device Moved To DONE!!", Toast.LENGTH_SHORT).show();
 			return true;
 		} else {
 			return super.onOptionsItemSelected(item);
