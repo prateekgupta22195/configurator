@@ -67,9 +67,9 @@ public class MessagesList {
         Map<Integer, String > temp = new HashMap<>();
         temp.put(0, "APN,"+apnMessages.get(simType)+"#");
         temp.put(1, "(ok)(.*)");
-        temp.put(2, "SERVER,0,52.33.252.113,4567,0#");
+        temp.put(2, "SERVER,0,52.33.252.113,5557,0#");
         temp.put(3, "ok");
-        temp.put(4, "TIMER,30,30#");
+        temp.put(4, "TIMER,5,60#");
         temp.put(5, "OK!");
         temp.put(6, "GMT,E,0,0#");
         temp.put(7, "OK!");
@@ -147,7 +147,7 @@ public class MessagesList {
         temp.put(1, "OK! for the newly-set APN to take effect, the device will reboot after 10s.");
         temp.put(2, "SERVER,0,52.33.252.113,4567,0#");
         temp.put(3, "OK");
-        temp.put(4, "TIMER,30,30#");
+        temp.put(4, "TIMER,5,60#");
         temp.put(5, "OK!");
         temp.put(6, "GMT,E,0,0#");
         temp.put(7, "OK!");
