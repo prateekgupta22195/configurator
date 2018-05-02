@@ -48,6 +48,7 @@ public class MessagesList {
         add("RV01 Portable");
         add("RV01 Normal");
         add("MT05(top10)");
+        add("GT06F");
     }};
 
     private Map<Integer, String> ET300plusMessages;
@@ -56,11 +57,37 @@ public class MessagesList {
     private Map<Integer, String> RV01PortableMessages;
     private Map<Integer, String> RV01NormalMessages;
     private Map<Integer, String> MT05Messages;
+    private Map<Integer, String>  GT06fMessages;
+
+    public Map<Integer, String> getGt06fMessages() {
+        return GT06fMessages;
+    }
+
+    public void setGt06fMessages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "APN,"+apnMessages.get(simType)+"#");
+        temp.put(1, "(ok)(.*)");
+        temp.put(2, "SERVER,0,52.33.252.113,5557,0#");
+        temp.put(3, "ok");
+        temp.put(4, "TIMER,5,60#");
+        temp.put(5, "OK!");
+        temp.put(6, "GMT,E,0,0#");
+        temp.put(7, "OK!");
+        temp.put(8, "DISTANCE,0#");
+        temp.put(9, "OK!");
+        temp.put(10, "POWERALM,ON,0,2,1,0#");
+        temp.put(11, "OK!");
+        temp.put(12, "ADT,ON,20#");
+        temp.put(13, "ON,20");
+        this.GT06fMessages = temp;
+    }
+
 
 
     public Map<Integer, String> getMT05Messages() {
         return MT05Messages;
     }
+
     public void setMT05Messages() {
         Map<Integer, String > temp = new HashMap<>();
         temp.put(0, "111111WWW:APN:"+apnMessages.get(simType) + ";");
@@ -109,6 +136,7 @@ public class MessagesList {
         this.ET300plusMessages = temp;
     }
 
+
     public Map<Integer, String> getET300plusMessages() {
         return ET300plusMessages;
     }
@@ -119,7 +147,7 @@ public class MessagesList {
         temp.put(1, "OK! for the newly-set APN to take effect, the device will reboot after 10s.");
         temp.put(2, "SERVER,0,52.33.252.113,4567,0#");
         temp.put(3, "OK");
-        temp.put(4, "TIMER,30,30#");
+        temp.put(4, "TIMER,5,60#");
         temp.put(5, "OK!");
         temp.put(6, "GMT,E,0,0#");
         temp.put(7, "OK!");
@@ -150,6 +178,7 @@ public class MessagesList {
         temp.put(machineList.get(3), getRV01PortableMessages());
         temp.put(machineList.get(4), getRV01NormalMessages());
         temp.put(machineList.get(5), getMT05Messages());
+        temp.put(machineList.get(6), getGt06fMessages());
         this.machineMessages = temp;
     }
 
@@ -165,6 +194,7 @@ public class MessagesList {
         setRV01PortableMessages();
         setRV01NormalMessages();
         setMT05Messages();
+        setGt06fMessages();
         setMachineMessages();
     }
 

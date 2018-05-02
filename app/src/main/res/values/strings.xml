@@ -1,9 +1,22 @@
 <resources>
     <string name="app_name">Configurator</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
     <string name="ET300plus">ET300+</string>
+    <string name="device_info">Get Info</string>
+    <string name="title_activity_main_activity3">Look Up</string>
+    <string name="details">Details</string>
+    <string name="share_details">Share Details</string>
+    <string name="enter_details">Enter Details</string>
+    <string name="device_change">Device Change</string>
+    <string name="vehicle_change">Vehicle Change</string>
+    <string name="new_installation">New Installation</string>
+    <string name="sim_change">Sim Change</string>
+    <string name="enter_user_id">Please Enter User Id</string>
+    <string name="title_activity_landing">Configurator</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

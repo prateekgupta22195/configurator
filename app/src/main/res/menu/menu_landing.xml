@@ -1,11 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.loconav.Tracking">
+    tools:context="com.loconav.configurator.activity.LandingActivity">
     <item
-        android:id="@+id/action_user"
+        android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="Done"
-        android:icon="@drawable/white_tick"
-        app:showAsAction="always" />
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
 </menu>
