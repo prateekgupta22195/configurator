@@ -65,12 +65,22 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
 
     private String getMsgToSetDeviceId(Device device) {
         String msgToSetDeviceID = "";
-        if(device.getDevice_type().equals("TK101B")) {
-            msgToSetDeviceID = "Number0" + device.getDevice_number().substring(3);
-        } else if(device.getDevice_type().equals("MT05(top10)")) {
-            msgToSetDeviceID = "111111WWW:IPN:52.33.252.113;COM:5678;";
-        }else {
-            msgToSetDeviceID = "param#";
+        switch (device.getDevice_type()) {
+            case "TK101B":
+                msgToSetDeviceID = "Number0" + device.getDevice_number().substring(3);
+                break;
+            case "MT05(top10)":
+                msgToSetDeviceID = "111111WWW:IPN:52.33.252.113;COM:5678;";
+                break;
+            case "GT-05":
+                msgToSetDeviceID = "Check123456";
+                break;
+            case "L-100":
+                msgToSetDeviceID = "GETGPS<6906>";
+                break;
+            default:
+                msgToSetDeviceID = "param#";
+                break;
         }
         return msgToSetDeviceID;
     }

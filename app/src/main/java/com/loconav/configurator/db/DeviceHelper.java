@@ -25,6 +25,7 @@ public class DeviceHelper extends DBHelper {
     private static final String KEY_TIMESTAMP = "timestamp";
     private static final String KEY_SIM_TYPE = "sim_type";
     private static final String KEY_DEVICE_STATUS = "device_status";
+    private static final String KEY_LOOKUP_AVAILABLE = "lookup_avalaible";
 
     public DeviceHelper() {
         super();
@@ -39,7 +40,8 @@ public class DeviceHelper extends DBHelper {
                 + KEY_DEVICE_ID + " TEXT,"
                 + KEY_SUCCESS_COUNT + " INTEGER,"
                 + KEY_SIM_TYPE + " TEXT,"
-                + KEY_DEVICE_STATUS + " TEXT"
+                + KEY_DEVICE_STATUS + " TEXT,"
+                + KEY_LOOKUP_AVAILABLE + " INTEGER"
                 + ")";
         db.execSQL(CREATE_DEVICE_TABLE);
     }
@@ -65,6 +67,7 @@ public class DeviceHelper extends DBHelper {
             values.put(KEY_TIMESTAMP, device.getTimeStamp());
             values.put(KEY_SIM_TYPE, device.getSimType());
             values.put(KEY_DEVICE_STATUS, "ACTIVE");
+            values.put(KEY_LOOKUP_AVAILABLE, 0);
             db.insert(TABLE_DEVICE, null, values);
             db.close();
         } else
@@ -83,7 +86,8 @@ public class DeviceHelper extends DBHelper {
                 KEY_SUCCESS_COUNT,
                 KEY_TIMESTAMP,
                 KEY_SIM_TYPE,
-                KEY_DEVICE_STATUS
+                KEY_DEVICE_STATUS,
+                KEY_LOOKUP_AVAILABLE
                 }, KEY_DEVICE_NO + "=?",
                 new String[] { deviceNumber }, null, null, null, null);
         Log.e("cursor count ", cursor.getCount() + "");
@@ -95,7 +99,8 @@ public class DeviceHelper extends DBHelper {
                     cursor.getInt(3) ,
                     cursor.getLong(4),
                     cursor.getString(5),
-                    cursor.getString(6));
+                    cursor.getString(6),
+                    cursor.getInt(7));
             return device;
         } else {
             return null;
@@ -113,7 +118,8 @@ public class DeviceHelper extends DBHelper {
                 KEY_SUCCESS_COUNT,
                 KEY_TIMESTAMP,
                 KEY_SIM_TYPE,
-                KEY_DEVICE_STATUS
+                KEY_DEVICE_STATUS,
+                KEY_LOOKUP_AVAILABLE
                 }, KEY_DEVICE_ID + "=?",
                 new String[] { deviceID }, null, null, null, null);
         Log.e("cursor count ", cursor.getCount() + "");
@@ -125,7 +131,8 @@ public class DeviceHelper extends DBHelper {
                     cursor.getInt(3) ,
                     cursor.getLong(4),
                     cursor.getString(5),
-                    cursor.getString(6));
+                    cursor.getString(6),
+                    cursor.getInt(7));
             return device;
         } else {
             return null;
@@ -153,6 +160,7 @@ public class DeviceHelper extends DBHelper {
                 device.setSuccess_count((cursor.getInt(4)));
                 device.setSimType(cursor.getString(5));
                 device.setDeviceStatus(cursor.getString(6));
+                device.setLookupAvailable(cursor.getInt(7));
                 // Adding contact to list
                 devicesList.add(device);
             } while (cursor.moveToNext());
@@ -173,6 +181,7 @@ public class DeviceHelper extends DBHelper {
         values.put(KEY_TIMESTAMP, System.currentTimeMillis());
         values.put(KEY_SIM_TYPE, device.getSimType());
         values.put(KEY_DEVICE_STATUS, device.getDeviceStatus());
+        values.put(KEY_LOOKUP_AVAILABLE, device.isLookupAvailable());
         // updating row
         db.update(TABLE_DEVICE, values, KEY_DEVICE_NO + " = ?",
                 new String[] { device.getDevice_number() });

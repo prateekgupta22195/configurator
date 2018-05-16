@@ -2,6 +2,7 @@ package com.loconav.configurator;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -30,6 +31,8 @@ public class ActiveFragment extends BaseFragment {
     ArrayList<Device> deviceList = new ArrayList<>();
     DeviceListAdapter adapter ;
     DeviceHelper deviceHelper;
+    Handler handler = new Handler();
+    Runnable runnable;
     @BindView(R.id.fab) FloatingActionButton fab;
 
 
@@ -91,5 +94,11 @@ public class ActiveFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         refreshList();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+//                     TODO : call call and ask for status
+            }
+        });
     }
 }

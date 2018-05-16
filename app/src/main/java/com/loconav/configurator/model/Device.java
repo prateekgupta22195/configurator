@@ -12,10 +12,14 @@ public class Device {
     private long timeStamp;
     private String deviceStatus;
     private String simType;
+
+
+
+    private int lookupAvailable;
     public Device() {}
 
     public Device(String deviceNo, String cType, String deviceId,
-                  Integer successCount, long timeStamp, String simType, String deviceStatus){
+                  Integer successCount, long timeStamp, String simType, String deviceStatus, int lookupAvailable){
         this.device_number = deviceNo;
         this.device_id = deviceId;
         this.success_count = successCount;
@@ -23,6 +27,7 @@ public class Device {
         this.timeStamp = timeStamp;
         this.simType = simType;
         this.deviceStatus = deviceStatus;
+        this.lookupAvailable = lookupAvailable;
     }
 
     public String getDevice_number() {
@@ -77,4 +82,11 @@ public class Device {
 
     public void setDeviceStatus(String deviceStatus) { this.deviceStatus = deviceStatus;}
 
+    public int isLookupAvailable() {
+        return lookupAvailable;
+    }
+
+    public void setLookupAvailable(int lookupAvailable) {
+        this.lookupAvailable = lookupAvailable;
+    }
 }

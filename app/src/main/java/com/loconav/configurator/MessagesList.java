@@ -49,6 +49,8 @@ public class MessagesList {
         add("RV01 Normal");
         add("MT05(top10)");
         add("GT06F");
+        add("L-100");
+        add("GT-05");
     }};
 
     private Map<Integer, String> ET300plusMessages;
@@ -58,6 +60,24 @@ public class MessagesList {
     private Map<Integer, String> RV01NormalMessages;
     private Map<Integer, String> MT05Messages;
     private Map<Integer, String>  GT06fMessages;
+    private Map<Integer, String>  L100Messages;
+    private Map<Integer, String> GT05Messages;
+
+    public Map<Integer, String> getGT05Messages() {
+        return GT05Messages;
+    }
+
+    public void setGT05Messages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "Begin123456");
+        temp.put(1, "BEGIN,CONFIG OK");
+        temp.put(2, "Apn123456 " + apnMessages.get(simType));
+        temp.put(3, "APN,CONFIG OK");
+        temp.put(4, "Adminip123456 52.33.252.113 5562");
+        temp.put(5, "ADMINIP,CONFIG OK");
+        this.GT05Messages = temp;
+    }
+
 
     public Map<Integer, String> getGt06fMessages() {
         return GT06fMessages;
@@ -69,7 +89,7 @@ public class MessagesList {
         temp.put(1, "(ok)(.*)");
         temp.put(2, "SERVER,0,52.33.252.113,5557,0#");
         temp.put(3, "ok");
-        temp.put(4, "TIMER,5,60#");
+        temp.put(4, "TIMER,5,5#");
         temp.put(5, "OK!");
         temp.put(6, "GMT,E,0,0#");
         temp.put(7, "OK!");
@@ -77,12 +97,29 @@ public class MessagesList {
         temp.put(9, "OK!");
         temp.put(10, "POWERALM,ON,0,2,1,0#");
         temp.put(11, "OK!");
-        temp.put(12, "ADT,ON,20#");
-        temp.put(13, "ON,20");
+        temp.put(12, "ADT,ON,10#");
+        temp.put(13, "ON,10");
+        temp.put(14, "HBT,1,1#");
+        temp.put(15, "(ok)(.*)");
         this.GT06fMessages = temp;
     }
 
+    public Map<Integer, String> getL100Messages() {
+        return L100Messages;
+    }
 
+    public void setL100Messages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "#SERVERCHANGE::52.33.252.113::5559;<6906>");
+        temp.put(1, "SERVER SOCKET UPDATED");
+        temp.put(2, "WEBSTART010S<6906>");
+        temp.put(3, "TRACKING SET TO 10S.");
+        temp.put(4, "SLEEPOFF<6906>");
+        temp.put(5, "SLEEP MODE DISABLED");
+        temp.put(6, "SDBT<6906>");
+        temp.put(7, "DBT DISABLED");
+        this.L100Messages = temp;
+    }
 
     public Map<Integer, String> getMT05Messages() {
         return MT05Messages;
@@ -144,14 +181,14 @@ public class MessagesList {
     public void setWETRACK2Messages() {
         Map<Integer, String > temp = new HashMap<>();
         temp.put(0, "APN,"+apnMessages.get(simType)+"#");
-        temp.put(1, "OK! for the newly-set APN to take effect, the device will reboot after 10s.");
+        temp.put(1, "(ok)(.*)");
         temp.put(2, "SERVER,0,52.33.252.113,4567,0#");
         temp.put(3, "OK");
-        temp.put(4, "TIMER,5,60#");
+        temp.put(4, "TIMER,30,30#");
         temp.put(5, "OK!");
         temp.put(6, "GMT,E,0,0#");
         temp.put(7, "OK!");
-        temp.put(8, "DISTANCE,0#");
+        temp.put(8, "DISTANCE,50#");
         temp.put(9, "OK!");
         temp.put(10, "POWERALM,ON,0,2,1,0#");
         temp.put(11, "OK!");
@@ -163,6 +200,7 @@ public class MessagesList {
         temp.put(17, "OK!");
         temp.put(18, "SENALM,OFF#");
         temp.put(19, "OK!");
+        temp.put(20, "HBT,1,1#");
         this.WETRACK2Messages = temp;
     }
 
@@ -179,6 +217,8 @@ public class MessagesList {
         temp.put(machineList.get(4), getRV01NormalMessages());
         temp.put(machineList.get(5), getMT05Messages());
         temp.put(machineList.get(6), getGt06fMessages());
+        temp.put(machineList.get(7), getL100Messages());
+        temp.put(machineList.get(8), getGT05Messages());
         this.machineMessages = temp;
     }
 
@@ -195,6 +235,8 @@ public class MessagesList {
         setRV01NormalMessages();
         setMT05Messages();
         setGt06fMessages();
+        setL100Messages();
+        setGT05Messages();
         setMachineMessages();
     }
 
