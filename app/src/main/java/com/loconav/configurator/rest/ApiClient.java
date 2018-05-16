@@ -1,5 +1,7 @@
 package com.loconav.configurator.rest;
 
+import retrofit2.Retrofit;
+
 /**
  * Created by prateek on 16/05/18.
  */

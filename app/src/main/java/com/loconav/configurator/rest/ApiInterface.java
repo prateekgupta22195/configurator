@@ -1,6 +1,5 @@
 package com.loconav.configurator.rest;
 
-import com.loconav.configurator.model.BulkLoopUpRes;
 import com.loconav.configurator.model.Device;
 
 import java.util.ArrayList;

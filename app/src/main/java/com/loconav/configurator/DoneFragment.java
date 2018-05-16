@@ -18,7 +18,6 @@ import butterknife.ButterKnife;
 
 public class DoneFragment extends BaseFragment {
 
-
     @BindView(R.id.device_status_list)
     ListView deviceStatusListView;
     ArrayList<Device> deviceList = new ArrayList<>();
