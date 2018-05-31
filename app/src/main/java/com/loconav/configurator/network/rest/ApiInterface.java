@@ -1,4 +1,4 @@
-package com.loconav.configurator.rest;
+package com.loconav.configurator.network.rest;
 
 import com.loconav.configurator.model.Device;
 

@@ -10,7 +10,7 @@ import com.loconav.configurator.app.AppController;
  */
 
 public abstract class DBHelper extends SQLiteOpenHelper {
-    private static final Integer DB_VERSION = 3;
+    private static final Integer DB_VERSION = 4;
     private static final String DB_NAME = "db_confi";
 
     public DBHelper() {

@@ -1,11 +1,16 @@
 package com.loconav.configurator;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ListView;
 
 import com.loconav.configurator.db.DeviceHelper;
 import com.loconav.configurator.model.Device;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -39,7 +44,6 @@ public class DoneFragment extends BaseFragment {
 
     @Override
     public void bindButterKnife(View view) {
-
         ButterKnife.bind(this, view);
     }
 
@@ -56,6 +60,25 @@ public class DoneFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         refreshList();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        if(event.getAction() == MessageEvent.Action.REFRESH_DEVICE_STATUS) {
+            refreshList();
+        }
     }
 
 

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,7 +60,7 @@ public class DeviceListAdapter extends ArrayAdapter<Device> {
         TextView deviceNumber = (TextView) convertView.findViewById(R.id.device_number);
         TextView deviceType = (TextView) convertView.findViewById(R.id.device_type);
         TextView time = (TextView)convertView.findViewById(R.id.time);
-
+        ImageView lookupAvailable = convertView.findViewById(R.id.look_up);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(device.getTimeStamp());
         int minute = calendar.get(Calendar.MINUTE);
@@ -115,7 +116,11 @@ public class DeviceListAdapter extends ArrayAdapter<Device> {
                 }
             }
         });
-
+        if(device.isLookupAvailable() == 1) {
+            lookupAvailable.setVisibility(View.VISIBLE);
+        } else{
+            lookupAvailable.setVisibility(View.INVISIBLE);
+        }
         Button delete = (Button) convertView.findViewById(R.id.delete);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +148,9 @@ public class DeviceListAdapter extends ArrayAdapter<Device> {
                 break;
             case "L-100":
                 msgToSetDeviceID = "GETGPS<6906>";
+                break;
+            case "M2C":
+                msgToSetDeviceID = "1,M2C,300.0=?,301.0=?,302.0=?,303.1=?,305.0=?,306.0=?";
                 break;
             default:
                 msgToSetDeviceID = "param#";

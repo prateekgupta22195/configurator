@@ -78,6 +78,9 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
             case "L-100":
                 msgToSetDeviceID = "GETGPS<6906>";
                 break;
+            case "M2C":
+                msgToSetDeviceID = "1,M2C,300.0=?,301.0=?,302.0=?,303.1=?,305.0=?,306.0=?";
+                break;
             default:
                 msgToSetDeviceID = "param#";
                 break;

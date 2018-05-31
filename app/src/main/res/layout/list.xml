@@ -54,11 +54,11 @@
 				android:layout_height="wrap_content"
 				android:text="5:30 AM"/>
 			<ImageView
-				android:layout_width="20dp"
+				android:layout_width="10dp"
 				android:id="@+id/look_up"
 				android:visibility="invisible"
-				android:layout_height="20dp"
-				android:src="@drawable/ic_star_available"
+				android:layout_height="10dp"
+				android:src="@drawable/star"
 				android:layout_below="@id/progressBar"
 				android:layout_alignParentRight="true"/>
 		</RelativeLayout>

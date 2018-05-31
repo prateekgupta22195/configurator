@@ -3,7 +3,6 @@ package com.loconav.configurator.db;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.SystemClock;
 import android.util.Log;
 
 import com.loconav.configurator.model.Device;
@@ -71,7 +70,7 @@ public class DeviceHelper extends DBHelper {
             db.insert(TABLE_DEVICE, null, values);
             db.close();
         } else
-            updateDevice(device);
+            updateDevice(device, true);
  // Closing database connection
     }
 
@@ -171,7 +170,7 @@ public class DeviceHelper extends DBHelper {
     }
 
     // Updating single contact
-    public void updateDevice(Device device) {
+    public void updateDevice(Device device, boolean updateTimeStamp) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_DEVICE_NO, device.getDevice_number());
@@ -195,6 +194,27 @@ public class DeviceHelper extends DBHelper {
         db.close();
     }
     // Getting contacts Count
+
+    public List<String> getAllUnavailLookupDevices() {
+        List<String> devicesList = new ArrayList<String>();
+        // Select All Query
+        String selectQuery = "SELECT * FROM " + TABLE_DEVICE +" WHERE " + KEY_LOOKUP_AVAILABLE + " = " + "'" + 0 + "'" + " ORDER BY "+ KEY_TIMESTAMP + " DESC";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                // Adding contact to list
+                if(!cursor.getString(3).equals("")) {
+                    devicesList.add(cursor.getString(3));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        // return contact list
+        return devicesList;
+    }
 
 
 }

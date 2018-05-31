@@ -27,7 +27,6 @@ public class SmsReceiver extends BroadcastReceiver {
     private static final String TAG = "SmsReceiver";
     public static Map<String , Map<Integer, String>> machineMessages;
 
-
     @Override
     public void onReceive(Context arg0, Intent arg1) {
         try {
@@ -73,28 +72,46 @@ public class SmsReceiver extends BroadcastReceiver {
 
 
     static void retrieveAndSetDeviceID (String message, Device device) {
-            if(device.getDevice_type().equals("TK101B")) {
-                device.setDevice_id("00"+ device.getDevice_number().substring(3));
-                device.setSuccess_count(device.getSuccess_count()+1);
-                new DeviceHelper().updateDevice(device);
-            } else if (device.getDevice_type().equals("MT05(top10)")) {
+        switch (device.getDevice_type()) {
+            case "TK101B":
+                device.setDevice_id("00" + device.getDevice_number().substring(3));
+                device.setSuccess_count(device.getSuccess_count() + 1);
+                new DeviceHelper().updateDevice(device, true);
+                break;
+            case "MT05(top10)": {
                 Pattern p = Pattern.compile("(\\d{14})");
                 Matcher m = p.matcher(message); // get a matcher object
-                if(m.find()) {
+
+                if (m.find()) {
                     device.setDevice_id(m.group(1));
-                    device.setSuccess_count(device.getSuccess_count()+1);
-                    new DeviceHelper().updateDevice(device);
+                    device.setSuccess_count(device.getSuccess_count() + 1);
+                    new DeviceHelper().updateDevice(device, true);
                 }
+                break;
             }
-            else {
+            case "M2C": {
                 Pattern p = Pattern.compile("(\\d{15})");
                 Matcher m = p.matcher(message); // get a matcher object
-                if(m.find()) {
-                    device.setDevice_id("0"+m.group(1));
-                    device.setSuccess_count(device.getSuccess_count()+1);
-                    new DeviceHelper().updateDevice(device);
+
+                if (m.find()) {
+                    device.setDevice_id(m.group(1));
+                    device.setSuccess_count(device.getSuccess_count() + 1);
+                    new DeviceHelper().updateDevice(device, true);
                 }
+                break;
             }
+            default: {
+                Pattern p = Pattern.compile("(\\d{15})");
+                Matcher m = p.matcher(message); // get a matcher object
+
+                if (m.find()) {
+                    device.setDevice_id("0" + m.group(1));
+                    device.setSuccess_count(device.getSuccess_count() + 1);
+                    new DeviceHelper().updateDevice(device, true);
+                }
+                break;
+            }
+        }
     }
 
     private void sendMessage(String phoneNumber, String messageToSend) {
@@ -136,7 +153,7 @@ public class SmsReceiver extends BroadcastReceiver {
     private void incrementDeviceStatus(Device device){
         int newStatus = device.getSuccess_count();
         device.setSuccess_count(++newStatus);
-        new DeviceHelper().updateDevice(device);
+        new DeviceHelper().updateDevice(device, true);
     }
 
 }

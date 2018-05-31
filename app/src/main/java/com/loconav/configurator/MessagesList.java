@@ -51,6 +51,8 @@ public class MessagesList {
         add("GT06F");
         add("L-100");
         add("GT-05");
+        add("GT06N");
+        add("M2C");
     }};
 
     private Map<Integer, String> ET300plusMessages;
@@ -62,6 +64,47 @@ public class MessagesList {
     private Map<Integer, String>  GT06fMessages;
     private Map<Integer, String>  L100Messages;
     private Map<Integer, String> GT05Messages;
+    private Map<Integer, String>  GT06NMessages;
+    private Map<Integer, String>  M2CMessages;
+
+
+    public Map<Integer, String> getM2cMessages() {
+        return M2CMessages;
+    }
+
+    public void setM2CMessages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "1,M2C,511.0=1,511.1=54.71.176.242,511.2=2000");
+        temp.put(1, "x,M2C,511.0=1,511.1=54.71.176.242,511.2=2000");
+        temp.put(2, "1,M2C, 502.1="+apnMessages.get(simType));
+        temp.put(3, "x,M2C,502.1="+apnMessages.get(simType));
+        temp.put(4, "1,M2C,0.0=1,0.1=120");
+        temp.put(5, "x,M2C,0.0=1,0.1=120");
+        temp.put(6, "1,M2C,2.0=1,2.1=30");
+        temp.put(7, "x,M2C,2.0=1,2.1=30");
+        this.M2CMessages = temp;
+    }
+
+
+    public Map<Integer, String> getGT06NMessages() {
+        return GT06NMessages;
+    }
+
+    public void setGT06NMessages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "APN,"+apnMessages.get(simType)+"#");
+        temp.put(1, "(ok)(.*)");
+        temp.put(2, "SERVER,0,52.33.252.113,5557,0#");
+        temp.put(3, "ok");
+        temp.put(4, "TIMER,5,5#");
+        temp.put(5, "OK!");
+        temp.put(6, "GMT,E,0,0#");
+        temp.put(7, "OK!");
+        temp.put(8, "POWERALM,ON,0,2,1,0#");
+        temp.put(9, "OK!");
+        temp.put(10, "HBT,1,1#");
+        this.GT06NMessages = temp;
+    }
 
     public Map<Integer, String> getGT05Messages() {
         return GT05Messages;
@@ -184,23 +227,21 @@ public class MessagesList {
         temp.put(1, "(ok)(.*)");
         temp.put(2, "SERVER,0,52.33.252.113,4567,0#");
         temp.put(3, "OK");
-        temp.put(4, "TIMER,30,30#");
+        temp.put(4, "TIMER,5,5#");
         temp.put(5, "OK!");
         temp.put(6, "GMT,E,0,0#");
         temp.put(7, "OK!");
-        temp.put(8, "DISTANCE,50#");
+        temp.put(8, "POWERALM,ON,0,2,1,0#");
         temp.put(9, "OK!");
-        temp.put(10, "POWERALM,ON,0,2,1,0#");
+        temp.put(10, "BATALM,OFF#");
         temp.put(11, "OK!");
-        temp.put(12, "BATALM,OFF#");
-        temp.put(13, "OK!");
-        temp.put(14, "MOVING,OFF#");
-        temp.put(15, "(ok)(.*)");
-        temp.put(16, "SPEED,OFF#");
+        temp.put(12, "MOVING,OFF#");
+        temp.put(13, "(ok)(.*)");
+        temp.put(14, "SPEED,OFF#");
+        temp.put(15, "OK!");
+        temp.put(16, "SENALM,OFF#");
         temp.put(17, "OK!");
-        temp.put(18, "SENALM,OFF#");
-        temp.put(19, "OK!");
-        temp.put(20, "HBT,1,1#");
+        temp.put(18, "HBT,1,1#");
         this.WETRACK2Messages = temp;
     }
 
@@ -219,6 +260,8 @@ public class MessagesList {
         temp.put(machineList.get(6), getGt06fMessages());
         temp.put(machineList.get(7), getL100Messages());
         temp.put(machineList.get(8), getGT05Messages());
+        temp.put(machineList.get(9), getGT06NMessages());
+        temp.put(machineList.get(10), getM2cMessages());
         this.machineMessages = temp;
     }
 
@@ -237,6 +280,8 @@ public class MessagesList {
         setGt06fMessages();
         setL100Messages();
         setGT05Messages();
+        setGT06NMessages();
+        setM2CMessages();
         setMachineMessages();
     }
 

@@ -1,6 +1,7 @@
-package com.loconav.configurator.rest;
+package com.loconav.configurator.network.rest;
 
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by prateek on 16/05/18.
