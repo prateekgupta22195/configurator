@@ -136,14 +136,12 @@ public class MessagesList {
         temp.put(5, "OK!");
         temp.put(6, "GMT,E,0,0#");
         temp.put(7, "OK!");
-        temp.put(8, "DISTANCE,0#");
+        temp.put(8, "POWERALM,ON,0,2,1,0#");
         temp.put(9, "OK!");
-        temp.put(10, "POWERALM,ON,0,2,1,0#");
-        temp.put(11, "OK!");
-        temp.put(12, "ADT,ON,10#");
-        temp.put(13, "ON,10");
-        temp.put(14, "HBT,1,1#");
-        temp.put(15, "(ok)(.*)");
+        temp.put(10, "ADT,ON,10#");
+        temp.put(11, "ON,10");
+        temp.put(12, "HBT,1,1#");
+        temp.put(13, "(ok)(.*)");
         this.GT06fMessages = temp;
     }
 
