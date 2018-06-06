@@ -239,7 +239,7 @@ public class MessagesList {
         temp.put(15, "OK!");
         temp.put(16, "SENALM,OFF#");
         temp.put(17, "OK!");
-        temp.put(18, "HBT,1,1#");
+        temp.put(18, "exbatcut,on,0,080,085,10#");
         this.WETRACK2Messages = temp;
     }
 
