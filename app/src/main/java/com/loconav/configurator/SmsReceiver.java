@@ -133,7 +133,7 @@ public class SmsReceiver extends BroadcastReceiver {
 
     private String messageToSend (String deviceType, int messageNumber) {
         String messageToSend = "";
-        if(messageNumber <= machineMessages.get(deviceType).size()) {
+        if(messageNumber < machineMessages.get(deviceType).size()) {
             messageToSend = machineMessages.get(deviceType).get(messageNumber);
         }
         return messageToSend;

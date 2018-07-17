@@ -53,6 +53,7 @@ public class MessagesList {
         add("GT-05");
         add("GT06N");
         add("M2C");
+        add("GT06-mini");
     }};
 
     private Map<Integer, String> ET300plusMessages;
@@ -66,6 +67,8 @@ public class MessagesList {
     private Map<Integer, String> GT05Messages;
     private Map<Integer, String>  GT06NMessages;
     private Map<Integer, String>  M2CMessages;
+    private Map<Integer, String>  GT06_MINI_Messages;
+
 
 
     public Map<Integer, String> getM2cMessages() {
@@ -83,6 +86,23 @@ public class MessagesList {
         temp.put(6, "1,M2C,2.0=1,2.1=30");
         temp.put(7, "x,M2C,2.0=1,2.1=30");
         this.M2CMessages = temp;
+    }
+
+    public Map<Integer, String> getGT06_MINI_Messages() {
+        return GT06_MINI_Messages;
+    }
+
+    public void setGT06_MINI_Messages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "APN,"+apnMessages.get(simType)+"#");
+        temp.put(1, "(ok)(.*)");
+        temp.put(2, "SERVER,0,52.33.252.113,4567,0#");
+        temp.put(3, "ok");
+        temp.put(4, "SENDS,0#");
+        temp.put(5, "ok");
+        temp.put(6, "TIMER,5,60#");
+        temp.put(7, "ok");
+        this.GT06_MINI_Messages = temp;
     }
 
 
@@ -260,6 +280,7 @@ public class MessagesList {
         temp.put(machineList.get(8), getGT05Messages());
         temp.put(machineList.get(9), getGT06NMessages());
         temp.put(machineList.get(10), getM2cMessages());
+        temp.put(machineList.get(11), getGT06_MINI_Messages());
         this.machineMessages = temp;
     }
 
@@ -280,6 +301,7 @@ public class MessagesList {
         setGT05Messages();
         setGT06NMessages();
         setM2CMessages();
+        setGT06_MINI_Messages();
         setMachineMessages();
     }
 
