@@ -81,6 +81,9 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
             case "M2C":
                 msgToSetDeviceID = "1,M2C,300.0=?,301.0=?,302.0=?,303.1=?,305.0=?,306.0=?";
                 break;
+            case "ST903":
+                msgToSetDeviceID = "Rconf";
+                break;
             default:
                 msgToSetDeviceID = "param#";
                 break;

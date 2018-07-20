@@ -54,6 +54,7 @@ public class MessagesList {
         add("GT06N");
         add("M2C");
         add("GT06-mini");
+        add("ST903");
     }};
 
     private Map<Integer, String> ET300plusMessages;
@@ -68,8 +69,27 @@ public class MessagesList {
     private Map<Integer, String>  GT06NMessages;
     private Map<Integer, String>  M2CMessages;
     private Map<Integer, String>  GT06_MINI_Messages;
+    private Map<Integer, String> ST903Messages;
 
 
+    public Map<Integer, String> getST903Messages() {
+        return ST903Messages;
+    }
+
+    public void setST903Messages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "7100000");
+        temp.put(1, "SET OK");
+        temp.put(2, "SLEEP0000 0");
+        temp.put(3, "OK");
+        temp.put(4, "8040000 52.33.252.113 5555");
+        temp.put(5, "SET OK");
+        temp.put(6, "8030000 " + apnMessages.get(simType));
+        temp.put(7, "SET OK");
+        temp.put(8, "8050000 60");
+        temp.put(9, "SET OK");
+        this.ST903Messages = temp;
+    }
 
     public Map<Integer, String> getM2cMessages() {
         return M2CMessages;
@@ -281,6 +301,7 @@ public class MessagesList {
         temp.put(machineList.get(9), getGT06NMessages());
         temp.put(machineList.get(10), getM2cMessages());
         temp.put(machineList.get(11), getGT06_MINI_Messages());
+        temp.put(machineList.get(12), getST903Messages());
         this.machineMessages = temp;
     }
 
@@ -302,6 +323,7 @@ public class MessagesList {
         setGT06NMessages();
         setM2CMessages();
         setGT06_MINI_Messages();
+        setST903Messages();
         setMachineMessages();
     }
 
@@ -348,5 +370,7 @@ public class MessagesList {
     public String getSimType() {
         return simType;
     }
+
+
 
 }

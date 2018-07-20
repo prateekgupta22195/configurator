@@ -100,6 +100,17 @@ public class SmsReceiver extends BroadcastReceiver {
                 }
                 break;
             }
+            case "ST903" : {
+                Pattern p = Pattern.compile("(\\d{10})");
+                Matcher m = p.matcher(message); // get a matcher object
+
+                if (m.find()) {
+                    device.setDevice_id(m.group(1));
+                    device.setSuccess_count(device.getSuccess_count() + 1);
+                    new DeviceHelper().updateDevice(device, true);
+                }
+                break;
+            }
             default: {
                 Pattern p = Pattern.compile("(\\d{15})");
                 Matcher m = p.matcher(message); // get a matcher object
