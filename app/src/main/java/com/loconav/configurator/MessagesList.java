@@ -224,7 +224,7 @@ public class MessagesList {
 
     public void setTK101BMessages() {
         Map<Integer, String > temp = new HashMap<>();
-        temp.put(0, "ip52.33.252.113port12345");
+        temp.put(0, "ip52.38.44.16port5034");
         temp.put(1, "set IP address and PORT ok.");
         temp.put(2, "apn123456 "+apnMessages.get(simType));
         temp.put(3, "Set APN ok");
@@ -239,8 +239,8 @@ public class MessagesList {
 
     public void setET300plusMessages() {
         Map<Integer, String > temp = new HashMap<>();
-        temp.put(0, "#6666#ip#52.33.252.113#4567#");
-        temp.put(1, "#6666#ip#52.33.252.113#4567#OK!");
+        temp.put(0, "#6666#ip#52.38.44.16#5032#");
+        temp.put(1, "#6666#ip#52.38.44.16#5032#OK!");
         temp.put(2, "#6666#sapn#"+ apnMessages.get(simType) +"#####");
         temp.put(3, "set APN =1 ok!");
         temp.put(4, "#6666#sleep#0#");
@@ -263,7 +263,7 @@ public class MessagesList {
         Map<Integer, String > temp = new HashMap<>();
         temp.put(0, "APN,"+apnMessages.get(simType)+"#");
         temp.put(1, "(ok)(.*)");
-        temp.put(2, "SERVER,0,52.33.252.113,4567,0#");
+        temp.put(2, "SERVER,0,52.38.44.16,5032,0#");
         temp.put(3, "OK");
         temp.put(4, "TIMER,5,5#");
         temp.put(5, "OK!");
@@ -278,7 +278,7 @@ public class MessagesList {
         temp.put(14, "SPEED,OFF#");
         temp.put(15, "OK!");
         temp.put(16, "SENALM,OFF#");
-        temp.put(17, "OK!");
+        temp.put(17, "(OK!)|(Vibration alarm is off, the device disarms!)");
         temp.put(18, "exbatcut,on,0,080,085,10#");
         this.WETRACK2Messages = temp;
     }
@@ -333,8 +333,8 @@ public class MessagesList {
 
     public void setRV01PortableMessages() {
         Map<Integer, String > temp = new HashMap<>();
-        temp.put(0, "#6666#ip#52.33.252.113#4567#");
-        temp.put(1, "#6666#ip#52.33.252.113#4567#OK!");
+        temp.put(0, "#6666#ip#52.38.44.16#5032#");
+        temp.put(1, "#6666#ip#52.38.44.16#5032#OK!");
         temp.put(2, "#6666#sapn#"+ apnMessages.get(getSimType()) +"#####");
         temp.put(3, "(.*)(ok)(.*)");
         temp.put(4, "#6666#SMT#10#");
@@ -351,8 +351,8 @@ public class MessagesList {
 
     public void setRV01NormalMessages() {
         Map<Integer, String > temp = new HashMap<>();
-        temp.put(0, "#6666#ip#52.33.252.113#4567#");
-        temp.put(1, "#6666#ip#52.33.252.113#4567#OK!");
+        temp.put(0, "#6666#ip#52.38.44.16#5032#");
+        temp.put(1, "#6666#ip#52.38.44.16#5032#OK!");
         temp.put(2, "#6666#sapn#"+ apnMessages.get(simType) +"#####");
         temp.put(3, "(.*)(ok)(.*)");
         temp.put(4, "#6666#SMT#10#");
