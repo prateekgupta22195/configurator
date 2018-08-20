@@ -55,6 +55,7 @@ public class MessagesList {
         add("M2C");
         add("GT06-mini");
         add("ST903");
+        add("LNWT");
     }};
 
     private Map<Integer, String> ET300plusMessages;
@@ -70,7 +71,7 @@ public class MessagesList {
     private Map<Integer, String>  M2CMessages;
     private Map<Integer, String>  GT06_MINI_Messages;
     private Map<Integer, String> ST903Messages;
-
+    private Map<Integer, String> LNWTMessages;
 
     public Map<Integer, String> getST903Messages() {
         return ST903Messages;
@@ -89,6 +90,29 @@ public class MessagesList {
         temp.put(8, "8050000 60");
         temp.put(9, "SET OK");
         this.ST903Messages = temp;
+    }
+
+    public Map<Integer, String> getLNWTMessages() {
+        return LNWTMessages;
+    }
+
+    public void setLNWTMessages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "Server#");
+        temp.put(1, "SERVER,1,cc59e31b75.loconav.com,5023,0");
+        temp.put(2, "Apn," + apnMessages.get(simType) + "#");
+        temp.put(3, "(ok)(.*)");
+        temp.put(4, "GMT,E,0,0#");
+        temp.put(5, "OK!");
+        temp.put(6, "Timer,5,60#");
+        temp.put(7, "OK!");
+        temp.put(8, "Sends,0#");
+        temp.put(9, "OK!");
+        temp.put(10, "Gpsdup,on#");
+        temp.put(11, "OK!");
+        temp.put(12, "Exbatcut,on,0,080,085,10#");
+        temp.put(13, "OK!");
+        this.LNWTMessages = temp;
     }
 
     public Map<Integer, String> getM2cMessages() {
@@ -302,6 +326,7 @@ public class MessagesList {
         temp.put(machineList.get(10), getM2cMessages());
         temp.put(machineList.get(11), getGT06_MINI_Messages());
         temp.put(machineList.get(12), getST903Messages());
+        temp.put(machineList.get(13), getLNWTMessages());
         this.machineMessages = temp;
     }
 
@@ -324,6 +349,7 @@ public class MessagesList {
         setM2CMessages();
         setGT06_MINI_Messages();
         setST903Messages();
+        setLNWTMessages();
         setMachineMessages();
     }
 

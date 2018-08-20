@@ -153,7 +153,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId()==R.id.action_search_device) {
+        if (item.getItemId() == R.id.action_search_device) {
             Intent i = new Intent(getApplicationContext(), LookUpEntry.class);
             startActivity(i);
             return true;
