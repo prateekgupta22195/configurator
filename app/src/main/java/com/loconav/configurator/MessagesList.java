@@ -60,7 +60,10 @@ public class MessagesList {
         add("JV200");
         add("Zenda ZDVT2");
         add("Ruptela");
+        add("Time Watch");
     }};
+
+
 
 
 
@@ -82,6 +85,24 @@ public class MessagesList {
     private Map<Integer, String> jv200Messages;
     private Map<Integer, String> zendaMessages;
     private Map<Integer, String> ruptelaMessages;
+    private Map<Integer, String> timeWatchMessages;
+
+
+
+    public Map<Integer, String> getTimeWatchMessages() {
+        return timeWatchMessages;
+    }
+
+    public void setTimeWatchMessages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "Begin123456");
+        temp.put(1, "ok!");
+        temp.put(2, "Adminip123456 52.38.44.16 5037");
+        temp.put(3, "ok!");
+        temp.put(4, "Apn123456 "+ apnMessages.get(simType));
+        temp.put(5, "APN ok");
+        this.timeWatchMessages = temp;
+    }
 
 
     public Map<Integer, String> getRuptelaMessages() {
@@ -403,6 +424,7 @@ public class MessagesList {
         temp.put(machineList.get(15), getJv200Messages());
         temp.put(machineList.get(16), getZendaMessages());
         temp.put(machineList.get(17), getRuptelaMessages());
+        temp.put(machineList.get(18), getTimeWatchMessages());
         this.machineMessages = temp;
     }
 
@@ -430,6 +452,7 @@ public class MessagesList {
         setJv200Messages();
         setZendaMessages();
         setRuptelaMessages();
+        setTimeWatchMessages();
         setMachineMessages();
     }
 

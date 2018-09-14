@@ -96,6 +96,9 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
             case "Ruptela":
                 msgToSetDeviceID = "imei";
                 break;
+            case "Time Watch":
+                msgToSetDeviceID = "Imei123456";
+                break;
             default:
                 msgToSetDeviceID = "param#";
                 break;
