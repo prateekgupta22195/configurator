@@ -152,6 +152,21 @@ public class DeviceListAdapter extends ArrayAdapter<Device> {
             case "M2C":
                 msgToSetDeviceID = "1,M2C,300.0=?,301.0=?,302.0=?,303.1=?,305.0=?,306.0=?";
                 break;
+            case "ST903":
+                msgToSetDeviceID = "Rconf";
+                break;
+            case "iTriangle":
+                msgToSetDeviceID = "%CHKCFG%aquila123";
+                break;
+            case "JV200":
+                msgToSetDeviceID = "Param,666666#";
+                break;
+            case "Zenda ZDVT2":
+                msgToSetDeviceID = "Param,0000#";
+                break;
+            case "Ruptela":
+                msgToSetDeviceID = "imei";
+                break;
             default:
                 msgToSetDeviceID = "param#";
                 break;

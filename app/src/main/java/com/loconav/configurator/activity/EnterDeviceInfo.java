@@ -84,6 +84,18 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
             case "ST903":
                 msgToSetDeviceID = "Rconf";
                 break;
+            case "iTriangle":
+                msgToSetDeviceID = "%CHKCFG%aquila123";
+                break;
+            case "JV200":
+                msgToSetDeviceID = "Param,666666#";
+                break;
+            case "Zenda ZDVT2":
+                msgToSetDeviceID = "Param,0000#";
+                break;
+            case "Ruptela":
+                msgToSetDeviceID = "imei";
+                break;
             default:
                 msgToSetDeviceID = "param#";
                 break;

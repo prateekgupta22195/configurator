@@ -56,7 +56,13 @@ public class MessagesList {
         add("GT06-mini");
         add("ST903");
         add("LNWT");
+        add("iTriangle");
+        add("JV200");
+        add("Zenda ZDVT2");
+        add("Ruptela");
     }};
+
+
 
     private Map<Integer, String> ET300plusMessages;
     private Map<Integer, String> TK101BMessages;
@@ -72,6 +78,56 @@ public class MessagesList {
     private Map<Integer, String>  GT06_MINI_Messages;
     private Map<Integer, String> ST903Messages;
     private Map<Integer, String> LNWTMessages;
+    private Map<Integer, String> iTriangleMessages;
+    private Map<Integer, String> jv200Messages;
+    private Map<Integer, String> zendaMessages;
+    private Map<Integer, String> ruptelaMessages;
+
+
+    public Map<Integer, String> getRuptelaMessages() {
+        return ruptelaMessages;
+    }
+
+    public void setRuptelaMessages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "Setconnection "+ apnMessages.get(simType) + ",,,TCP,52.38.44.16,5039");
+        temp.put(1, "Set connection data ok");
+        this.ruptelaMessages = temp;
+    }
+
+    public Map<Integer, String> getZendaMessages() {
+        return zendaMessages;
+    }
+
+    public void setZendaMessages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "Server,0000,0,52.38.44.16,5038,0#");
+        temp.put(1, "OK");
+        temp.put(2, "Apn,0000," + apnMessages.get(simType) + "#");
+        temp.put(3, "OK");
+        temp.put(4, "Timer,0000,5,60#");
+        temp.put(5, "OK");
+        this.zendaMessages = temp;
+    }
+
+
+    public Map<Integer, String> getJv200Messages() {
+        return jv200Messages;
+    }
+
+    public void setJv200Messages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "Server,666666,0,52.38.44.16,5032,0#");
+        temp.put(1, "OK");
+        temp.put(2, "Apn,666666," + apnMessages.get(simType) + "#");
+        temp.put(3, "OK");
+        temp.put(4, "Timer,666666,5,60#");
+        temp.put(5, "OK");
+        temp.put(6, "Sends,666666,0#");
+        temp.put(7, "OK");
+        this.jv200Messages = temp;
+    }
+
 
     public Map<Integer, String> getST903Messages() {
         return ST903Messages;
@@ -91,6 +147,22 @@ public class MessagesList {
         temp.put(9, "SET OK");
         this.ST903Messages = temp;
     }
+
+
+
+    public Map<Integer, String> getiTriangleMessages() {
+        return iTriangleMessages;
+    }
+
+    public void setiTriangleMessages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "set$xxxxxxxxx@aquila123#CFG_GPRS:"+ apnMessages.get(simType) + ",,,52.38.44.16,5040*");
+        temp.put(1, "Success");
+        temp.put(2, "set$180721569@aquila123#CFG_TL:GPRS,10S,5M*");
+        temp.put(3, "Success");
+        this.iTriangleMessages = temp;
+    }
+
 
     public Map<Integer, String> getLNWTMessages() {
         return LNWTMessages;
@@ -327,6 +399,10 @@ public class MessagesList {
         temp.put(machineList.get(11), getGT06_MINI_Messages());
         temp.put(machineList.get(12), getST903Messages());
         temp.put(machineList.get(13), getLNWTMessages());
+        temp.put(machineList.get(14), getiTriangleMessages());
+        temp.put(machineList.get(15), getJv200Messages());
+        temp.put(machineList.get(16), getZendaMessages());
+        temp.put(machineList.get(17), getRuptelaMessages());
         this.machineMessages = temp;
     }
 
@@ -350,6 +426,10 @@ public class MessagesList {
         setGT06_MINI_Messages();
         setST903Messages();
         setLNWTMessages();
+        setiTriangleMessages();
+        setJv200Messages();
+        setZendaMessages();
+        setRuptelaMessages();
         setMachineMessages();
     }
 
