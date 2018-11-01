@@ -12,6 +12,7 @@ public class Device {
     private long timeStamp;
     private String deviceStatus;
     private String simType;
+    private String password;
 
 
 
@@ -19,8 +20,9 @@ public class Device {
     public Device() {}
 
     public Device(String deviceNo, String cType, String deviceId,
-                  Integer successCount, long timeStamp, String simType, String deviceStatus, int lookupAvailable){
+                  Integer successCount, long timeStamp, String simType, String deviceStatus, int lookupAvailable, String password){
         this.device_number = deviceNo;
+        this.password = password;
         this.device_id = deviceId;
         this.success_count = successCount;
         this.device_type = cType;
@@ -88,5 +90,13 @@ public class Device {
 
     public void setLookupAvailable(int lookupAvailable) {
         this.lookupAvailable = lookupAvailable;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

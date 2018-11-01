@@ -17,6 +17,8 @@ import java.util.Map;
 
 public class MessagesList {
     private String simType = "Airtel";
+    private String password = "6666";
+
     public List<String> simList = new ArrayList<String>(){{
         add("Airtel");
         add("Vodafone");
@@ -61,8 +63,12 @@ public class MessagesList {
         add("Zenda ZDVT2");
         add("Ruptela");
         add("Time Watch");
+        add("GT02 Password");
+        add("WeTrack Password");
+        add("WeTrack Bike");
+        add("GT02");
+        add("G200 Portable");
     }};
-
 
 
 
@@ -86,7 +92,112 @@ public class MessagesList {
     private Map<Integer, String> zendaMessages;
     private Map<Integer, String> ruptelaMessages;
     private Map<Integer, String> timeWatchMessages;
+    private Map<Integer, String> GT02PasswordMessages;
+    private Map<Integer, String> WeTrackPasswordMessages;
+    private Map<Integer, String> WeTrackBikeMessages;
+    private Map<Integer, String> GT02Messages;
+    private Map<Integer, String> G200PortableMessages;
 
+
+
+
+
+    public Map<Integer, String> getGT02Messages() {
+        return GT02Messages;
+    }
+
+    public void setGT02Messages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "Server,666666,0,52.38.44.16,5042,0#");
+        temp.put(1, "(ok)(.*)");
+        temp.put(2, "Apn,666666," + apnMessages.get(simType) + "#");
+        temp.put(3, "(ok)(.*)");
+        temp.put(4, "Timer,666666,5,60#");
+        temp.put(5, "(ok)(.*)");
+        temp.put(6, "Sends,666666,0#");
+        temp.put(7, "(ok)(.*)");
+        this.GT02Messages = temp;
+
+    }
+
+
+    public Map<Integer, String> getG200PortableMessages() {
+        return G200PortableMessages;
+    }
+
+    public void setG200PortableMessages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "Apn123456 " + apnMessages.get(simType) + "#");
+        temp.put(1, "APN,CONFIG OK");
+        temp.put(2, "Adminip123456 52.38.44.16 5045");
+        temp.put(3, "ADMINIP,CONFIG OK");
+        temp.put(4, "itv123456 300");
+        this.G200PortableMessages = temp;
+    }
+
+
+    public Map<Integer, String> getWeTrackBikeMessages() {
+        return WeTrackBikeMessages;
+    }
+
+    public void setWeTrackBikeMessages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "Server#");
+        temp.put(1, "SERVER,1,cc59e31b75.loconav.com,5023,0");
+        temp.put(2, "Apn," + apnMessages.get(simType) + "#");
+        temp.put(3, "(ok)(.*)");
+        temp.put(4, "GMT,E,0,0#");
+        temp.put(5, "(ok)(.*)");
+        temp.put(6, "Timer,5,60#");
+        temp.put(7, "(ok)(.*)");
+        temp.put(8, "Sends,0#");
+        temp.put(9, "(ok)(.*)");
+        temp.put(10, "Gpsdup,on#");
+        temp.put(11, "(ok)(.*)");
+        temp.put(12, "Exbatcut,on,0,120,125,10#");
+        temp.put(13, "(ok)(.*)");
+        this.WeTrackBikeMessages = temp;
+    }
+
+
+    public Map<Integer, String> getWeTrackPasswordMessages() {
+        return WeTrackPasswordMessages;
+    }
+
+    public void setWeTrackPasswordMessages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "Server," + password + ",0,52.38.44.16,5032,0#");
+        temp.put(1, "(ok)(.*)");
+        temp.put(2, "Apn," + password + "," + apnMessages.get(simType) + "#");
+        temp.put(3, "(ok)(.*)");
+        temp.put(4, "GMT," + password + ",E,0,0#");
+        temp.put(5, "(ok)(.*)");
+        temp.put(6, "Timer," + password + ",5,60#");
+        temp.put(7, "(ok)(.*)");
+        temp.put(8, "Sends," + password + ",0#");
+        temp.put(9, "(ok)(.*)");
+        temp.put(10, "Gpsdup," + password + ",on#");
+        temp.put(11, "(ok)(.*)");
+        temp.put(12, "Exbatcut,"+ password + ",on,0,080,085,10#");
+        this.WeTrackPasswordMessages = temp;
+    }
+
+    public Map<Integer, String> getGT02PasswordMessages() {
+        return GT02PasswordMessages;
+    }
+
+    public void setGT02PasswordMessages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "Server," + password + ",0,52.38.44.16,5042,0#");
+        temp.put(1, "(ok)(.*)");
+        temp.put(2, "Apn," + password + "," + apnMessages.get(simType) + "#");
+        temp.put(3, "(ok)(.*)");
+        temp.put(4, "Timer," + password + ",5,60#");
+        temp.put(5, "(ok)(.*)");
+        temp.put(6, "Sends," + password + ",0#");
+        temp.put(7, "(ok)(.*)");
+        this.GT02PasswordMessages = temp;
+    }
 
 
     public Map<Integer, String> getTimeWatchMessages() {
@@ -111,7 +222,7 @@ public class MessagesList {
 
     public void setRuptelaMessages() {
         Map<Integer, String > temp = new HashMap<>();
-        temp.put(0, "Setconnection "+ apnMessages.get(simType) + ",,,TCP,52.38.44.16,5039");
+        temp.put(0, " Setconnection "+ apnMessages.get(simType) + ",,,TCP,52.38.44.16,5039");
         temp.put(1, "Set connection data ok");
         this.ruptelaMessages = temp;
     }
@@ -378,7 +489,7 @@ public class MessagesList {
 
     public void setWETRACK2Messages() {
         Map<Integer, String > temp = new HashMap<>();
-        temp.put(0, "APN,"+apnMessages.get(simType)+"#");
+        temp.put(0, "APN,"+ apnMessages.get(simType)+"#");
         temp.put(1, "(ok)(.*)");
         temp.put(2, "SERVER,0,52.38.44.16,5032,0#");
         temp.put(3, "OK");
@@ -425,6 +536,11 @@ public class MessagesList {
         temp.put(machineList.get(16), getZendaMessages());
         temp.put(machineList.get(17), getRuptelaMessages());
         temp.put(machineList.get(18), getTimeWatchMessages());
+        temp.put(machineList.get(19), getGT02PasswordMessages());
+        temp.put(machineList.get(20), getWeTrackPasswordMessages());
+        temp.put(machineList.get(21), getWeTrackBikeMessages());
+        temp.put(machineList.get(22), getGT02Messages());
+        temp.put(machineList.get(23), getG200PortableMessages());
         this.machineMessages = temp;
     }
 
@@ -453,6 +569,11 @@ public class MessagesList {
         setZendaMessages();
         setRuptelaMessages();
         setTimeWatchMessages();
+        setGT02PasswordMessages();
+        setWeTrackPasswordMessages();
+        setWeTrackBikeMessages();
+        setGT02Messages();
+        setG200PortableMessages();
         setMachineMessages();
     }
 
@@ -500,5 +621,11 @@ public class MessagesList {
         return simType;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

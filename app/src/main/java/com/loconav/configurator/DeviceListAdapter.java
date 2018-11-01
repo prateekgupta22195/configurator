@@ -76,6 +76,7 @@ public class DeviceListAdapter extends ArrayAdapter<Device> {
         deviceNumber.setText(device.getDevice_number().toString());
         deviceType.setText(device.getDevice_type());
         messagesList.setSimType(device.getSimType());
+        messagesList.setPassword(device.getPassword());
         machineMessages = messagesList.getMachineMessages();
 
         time.setText(hour + ":" + minute + " " + am_pm);
@@ -165,11 +166,19 @@ public class DeviceListAdapter extends ArrayAdapter<Device> {
                 msgToSetDeviceID = "Param,0000#";
                 break;
             case "Ruptela":
-                msgToSetDeviceID = "imei";
+                msgToSetDeviceID = " imei";
                 break;
             case "Time Watch":
                 msgToSetDeviceID = "Imei123456";
                 break;
+            case "GT02 Password":
+                msgToSetDeviceID  = "Param," + device.getPassword() + "#";
+            case "WeTrack Password":
+                msgToSetDeviceID = "Param," + device.getPassword() + "#";
+            case "GT02":
+                msgToSetDeviceID = "Param,666666#";
+            case "G200 Portable":
+                msgToSetDeviceID = "Check123456";
             default:
                 msgToSetDeviceID = "param#";
                 break;

@@ -44,6 +44,7 @@ public class SmsReceiver extends BroadcastReceiver {
                     String deviceType = device.getDevice_type();
                     int status = device.getSuccess_count();
                     messagesList.setSimType(device.getSimType());
+                    messagesList.setPassword(device.getPassword());
                     machineMessages = messagesList.getMachineMessages();
                     if(status == -1) {
                         retrieveAndSetDeviceID(message, device);

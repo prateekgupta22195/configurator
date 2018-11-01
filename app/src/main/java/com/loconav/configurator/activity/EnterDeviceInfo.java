@@ -27,6 +27,7 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
     @BindView(R.id.button_submit) Button submit;
     @BindView(R.id.select_device) Spinner selectDevice;
     @BindView(R.id.select_sim) Spinner selectSim;
+    @BindView(R.id.et_password) EditText password;
     DeviceHelper deviceHelper = new DeviceHelper();
     SmsManager sms = SmsManager.getDefault();
     MessagesList messagesList ;
@@ -94,11 +95,19 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
                 msgToSetDeviceID = "Param,0000#";
                 break;
             case "Ruptela":
-                msgToSetDeviceID = "imei";
+                msgToSetDeviceID = " imei";
                 break;
             case "Time Watch":
                 msgToSetDeviceID = "Imei123456";
                 break;
+            case "GT02 Password":
+                msgToSetDeviceID  = "Param," + device.getPassword() + "#";
+            case "WeTrack Password":
+                msgToSetDeviceID = "Param," + device.getPassword() + "#";
+            case "GT02":
+                msgToSetDeviceID = "Param,666666#";
+            case "G200 Portable":
+                msgToSetDeviceID = "Check123456";
             default:
                 msgToSetDeviceID = "param#";
                 break;
