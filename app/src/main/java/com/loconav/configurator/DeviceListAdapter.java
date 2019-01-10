@@ -173,12 +173,16 @@ public class DeviceListAdapter extends ArrayAdapter<Device> {
                 break;
             case "GT02 Password":
                 msgToSetDeviceID  = "Param," + device.getPassword() + "#";
+                break;
             case "WeTrack Password":
                 msgToSetDeviceID = "Param," + device.getPassword() + "#";
+                break;
             case "GT02":
                 msgToSetDeviceID = "Param,666666#";
+                break;
             case "G200 Portable":
                 msgToSetDeviceID = "Check123456";
+                break;
             default:
                 msgToSetDeviceID = "param#";
                 break;

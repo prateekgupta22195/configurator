@@ -148,7 +148,7 @@ public class MessagesList {
         temp.put(3, "(ok)(.*)");
         temp.put(4, "GMT,E,0,0#");
         temp.put(5, "(ok)(.*)");
-        temp.put(6, "Timer,5,60#");
+        temp.put(6, "Timer,5,600#");
         temp.put(7, "(ok)(.*)");
         temp.put(8, "Sends,0#");
         temp.put(9, "(ok)(.*)");
@@ -493,7 +493,7 @@ public class MessagesList {
         temp.put(1, "(ok)(.*)");
         temp.put(2, "SERVER,0,52.38.44.16,5032,0#");
         temp.put(3, "OK");
-        temp.put(4, "TIMER,5,5#");
+        temp.put(4, "TIMER,5,60#");
         temp.put(5, "OK!");
         temp.put(6, "GMT,E,0,0#");
         temp.put(7, "OK!");

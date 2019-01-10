@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -22,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class EnterDeviceInfo extends AppCompatActivity {
     @BindView(R.id.et_device_number) EditText deviceNumber;
     @BindView(R.id.button_submit) Button submit;
     @BindView(R.id.select_device) Spinner selectDevice;
@@ -51,6 +52,7 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
                     device.setDevice_number(dbNumber);
                     device.setDevice_type(selectDevice.getSelectedItem().toString());
                     device.setSimType(selectSim.getSelectedItem().toString());
+                    device.setPassword(password.getText().toString());
                     device.setDevice_id("");
                     deviceHelper.createOrUpdateDevice(device);
                     String msgToSetDeviceID = getMsgToSetDeviceId(device);
@@ -102,12 +104,16 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
                 break;
             case "GT02 Password":
                 msgToSetDeviceID  = "Param," + device.getPassword() + "#";
+                break;
             case "WeTrack Password":
                 msgToSetDeviceID = "Param," + device.getPassword() + "#";
+                break;
             case "GT02":
                 msgToSetDeviceID = "Param,666666#";
+                break;
             case "G200 Portable":
                 msgToSetDeviceID = "Check123456";
+                break;
             default:
                 msgToSetDeviceID = "param#";
                 break;
@@ -119,6 +125,18 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
         ArrayAdapter<String> deviceAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, messagesList.machineList);
         deviceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         selectDevice.setAdapter(deviceAdapter);
+        selectDevice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(selectDevice.getSelectedItem().toString().toLowerCase().contains("password"))
+                    password.setVisibility(View.VISIBLE);
+                else
+                    password.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
     }
 
     private void setSelectSimSpinner() {
@@ -126,10 +144,4 @@ public class EnterDeviceInfo extends AppCompatActivity implements AdapterView.On
         simAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         selectSim.setAdapter(simAdapter);
     }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {}
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {}
 }
