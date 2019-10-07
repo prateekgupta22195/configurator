@@ -18,6 +18,7 @@ import java.util.Map;
 public class MessagesList {
     private String simType = "Airtel";
     private String password = "6666";
+    private String ip = "52.38.44.16";
 
     public List<String> simList = new ArrayList<String>(){{
         add("Airtel");
@@ -208,7 +209,7 @@ public class MessagesList {
         Map<Integer, String > temp = new HashMap<>();
         temp.put(0, "Begin123456");
         temp.put(1, "ok!");
-        temp.put(2, "Adminip123456 52.38.44.16 5037");
+        temp.put(2, String.format("Adminip123456 %s 5037", ip));
         temp.put(3, "ok!");
         temp.put(4, "Apn123456 "+ apnMessages.get(simType));
         temp.put(5, "APN ok");
@@ -222,7 +223,7 @@ public class MessagesList {
 
     public void setRuptelaMessages() {
         Map<Integer, String > temp = new HashMap<>();
-        temp.put(0, " Setconnection "+ apnMessages.get(simType) + ",,,TCP,52.38.44.16,5039");
+        temp.put(0, " Setconnection "+ apnMessages.get(simType) + String.format(",,,TCP,%s,5039", ip));
         temp.put(1, "Set connection data ok");
         this.ruptelaMessages = temp;
     }
@@ -233,7 +234,7 @@ public class MessagesList {
 
     public void setZendaMessages() {
         Map<Integer, String > temp = new HashMap<>();
-        temp.put(0, "Server,0000,0,52.38.44.16,5038,0#");
+        temp.put(0, String.format("Server,0000,0,%s,5038,0#", ip));
         temp.put(1, "OK");
         temp.put(2, "Apn,0000," + apnMessages.get(simType) + "#");
         temp.put(3, "OK");
@@ -249,7 +250,7 @@ public class MessagesList {
 
     public void setJv200Messages() {
         Map<Integer, String > temp = new HashMap<>();
-        temp.put(0, "Server,666666,0,52.38.44.16,5032,0#");
+        temp.put(0, String.format("Server,666666,0,%s,5050,0#", ip));
         temp.put(1, "OK");
         temp.put(2, "Apn,666666," + apnMessages.get(simType) + "#");
         temp.put(3, "OK");
@@ -271,7 +272,7 @@ public class MessagesList {
         temp.put(1, "SET OK");
         temp.put(2, "SLEEP0000 0");
         temp.put(3, "OK");
-        temp.put(4, "8040000 52.33.252.113 5555");
+        temp.put(4, String.format("8040000 %s 5045", ip));
         temp.put(5, "SET OK");
         temp.put(6, "8030000 " + apnMessages.get(simType));
         temp.put(7, "SET OK");
@@ -288,7 +289,7 @@ public class MessagesList {
 
     public void setiTriangleMessages() {
         Map<Integer, String > temp = new HashMap<>();
-        temp.put(0, "set$xxxxxxxxx@aquila123#CFG_GPRS:"+ apnMessages.get(simType) + ",,,52.38.44.16,5040*");
+        temp.put(0, "set$xxxxxxxxx@aquila123#CFG_GPRS:"+ apnMessages.get(simType) + String.format(",,,%s,5040*", ip));
         temp.put(1, "Success");
         temp.put(2, "set$180721569@aquila123#CFG_TL:GPRS,10S,5M*");
         temp.put(3, "Success");
@@ -303,7 +304,7 @@ public class MessagesList {
     public void setLNWTMessages() {
         Map<Integer, String > temp = new HashMap<>();
         temp.put(0, "Server#");
-        temp.put(1, "SERVER,1,cc59e31b75.loconav.com,5023,0");
+        temp.put(1, String.format("SERVER,1,%s,5032,0", ip));
         temp.put(2, "Apn," + apnMessages.get(simType) + "#");
         temp.put(3, "(ok)(.*)");
         temp.put(4, "GMT,E,0,0#");
@@ -325,8 +326,8 @@ public class MessagesList {
 
     public void setM2CMessages() {
         Map<Integer, String > temp = new HashMap<>();
-        temp.put(0, "1,M2C,511.0=1,511.1=54.71.176.242,511.2=2000");
-        temp.put(1, "x,M2C,511.0=1,511.1=54.71.176.242,511.2=2000");
+        temp.put(0, String.format("1,M2C,511.0=1,511.1=%s,511.2=5048",ip));
+        temp.put(1, String.format("x,M2C,511.0=1,511.1=%s,511.2=5048",ip));
         temp.put(2, "1,M2C, 502.1="+apnMessages.get(simType));
         temp.put(3, "x,M2C,502.1="+apnMessages.get(simType));
         temp.put(4, "1,M2C,0.0=1,0.1=120");
@@ -344,7 +345,7 @@ public class MessagesList {
         Map<Integer, String > temp = new HashMap<>();
         temp.put(0, "APN,"+apnMessages.get(simType)+"#");
         temp.put(1, "(ok)(.*)");
-        temp.put(2, "SERVER,0,52.33.252.113,4567,0#");
+        temp.put(2, String.format("SERVER,0,%s,5032,0#", ip));
         temp.put(3, "ok");
         temp.put(4, "SENDS,0#");
         temp.put(5, "ok");
@@ -362,7 +363,7 @@ public class MessagesList {
         Map<Integer, String > temp = new HashMap<>();
         temp.put(0, "APN,"+apnMessages.get(simType)+"#");
         temp.put(1, "(ok)(.*)");
-        temp.put(2, "SERVER,0,52.33.252.113,5557,0#");
+        temp.put(2, String.format("SERVER,0,%s,5032,0#", ip));
         temp.put(3, "ok");
         temp.put(4, "TIMER,5,5#");
         temp.put(5, "OK!");
@@ -384,7 +385,7 @@ public class MessagesList {
         temp.put(1, "BEGIN,CONFIG OK");
         temp.put(2, "Apn123456 " + apnMessages.get(simType));
         temp.put(3, "APN,CONFIG OK");
-        temp.put(4, "Adminip123456 52.33.252.113 5562");
+        temp.put(4, String.format("Adminip123456 %s 5045", ip));
         temp.put(5, "ADMINIP,CONFIG OK");
         this.GT05Messages = temp;
     }
@@ -398,7 +399,7 @@ public class MessagesList {
         Map<Integer, String > temp = new HashMap<>();
         temp.put(0, "APN,"+apnMessages.get(simType)+"#");
         temp.put(1, "(ok)(.*)");
-        temp.put(2, "SERVER,0,52.33.252.113,5557,0#");
+        temp.put(2, String.format("SERVER,0,%s,5032,0#",ip));
         temp.put(3, "ok");
         temp.put(4, "TIMER,5,5#");
         temp.put(5, "OK!");
@@ -419,7 +420,7 @@ public class MessagesList {
 
     public void setL100Messages() {
         Map<Integer, String > temp = new HashMap<>();
-        temp.put(0, "#SERVERCHANGE::52.33.252.113::5559;<6906>");
+        temp.put(0, String.format("#SERVERCHANGE::%s::5036;<6906>", ip));
         temp.put(1, "SERVER SOCKET UPDATED");
         temp.put(2, "WEBSTART010S<6906>");
         temp.put(3, "TRACKING SET TO 10S.");
@@ -437,9 +438,9 @@ public class MessagesList {
     public void setMT05Messages() {
         Map<Integer, String > temp = new HashMap<>();
         temp.put(0, "111111WWW:APN:"+apnMessages.get(simType) + ";");
-        temp.put(1, "(.*)(IPN:52.33.252.113;COM:5678)(.*)");
+        temp.put(1, String.format("(.*)(IPN:%s;COM:5047)(.*)", ip));
         temp.put(2, "111111WWW:RPT:10;SLP:10;");
-        temp.put(3, "(.*)(IPN:52.33.252.113;COM:5678)(.*)");
+        temp.put(3, String.format("(.*)(IPN:%s;COM:5047)(.*)", ip));
         this.MT05Messages = temp;
     }
 
@@ -452,7 +453,7 @@ public class MessagesList {
 
     public void setTK101BMessages() {
         Map<Integer, String > temp = new HashMap<>();
-        temp.put(0, "ip52.38.44.16port5034");
+        temp.put(0, String.format("ip%sport5034", ip));
         temp.put(1, "set IP address and PORT ok.");
         temp.put(2, "apn123456 "+apnMessages.get(simType));
         temp.put(3, "Set APN ok");
@@ -467,8 +468,8 @@ public class MessagesList {
 
     public void setET300plusMessages() {
         Map<Integer, String > temp = new HashMap<>();
-        temp.put(0, "#6666#ip#52.38.44.16#5032#");
-        temp.put(1, "#6666#ip#52.38.44.16#5032#OK!");
+        temp.put(0, String.format("#6666#ip#%s#5051#", ip));
+        temp.put(1, String.format("#6666#ip#%s#5051#OK!", ip));
         temp.put(2, "#6666#sapn#"+ apnMessages.get(simType) +"#####");
         temp.put(3, "set APN =1 ok!");
         temp.put(4, "#6666#sleep#0#");
@@ -491,7 +492,7 @@ public class MessagesList {
         Map<Integer, String > temp = new HashMap<>();
         temp.put(0, "APN,"+ apnMessages.get(simType)+"#");
         temp.put(1, "(ok)(.*)");
-        temp.put(2, "SERVER,0,52.38.44.16,5032,0#");
+        temp.put(2, String.format("SERVER,0,%s,5032,0#", ip));
         temp.put(3, "OK");
         temp.put(4, "TIMER,5,60#");
         temp.put(5, "OK!");
@@ -583,8 +584,8 @@ public class MessagesList {
 
     public void setRV01PortableMessages() {
         Map<Integer, String > temp = new HashMap<>();
-        temp.put(0, "#6666#ip#52.38.44.16#5032#");
-        temp.put(1, "#6666#ip#52.38.44.16#5032#OK!");
+        temp.put(0, String.format("#6666#ip#%s#5051#", ip));
+        temp.put(1, String.format("#6666#ip#%s#5051#OK!", ip));
         temp.put(2, "#6666#sapn#"+ apnMessages.get(getSimType()) +"#####");
         temp.put(3, "(.*)(ok)(.*)");
         temp.put(4, "#6666#SMT#10#");
@@ -601,8 +602,8 @@ public class MessagesList {
 
     public void setRV01NormalMessages() {
         Map<Integer, String > temp = new HashMap<>();
-        temp.put(0, "#6666#ip#52.38.44.16#5032#");
-        temp.put(1, "#6666#ip#52.38.44.16#5032#OK!");
+        temp.put(0, String.format("#6666#ip#%s#5051#", ip));
+        temp.put(1, String.format("#6666#ip#%s#5051#OK!", ip));
         temp.put(2, "#6666#sapn#"+ apnMessages.get(simType) +"#####");
         temp.put(3, "(.*)(ok)(.*)");
         temp.put(4, "#6666#SMT#10#");
