@@ -30,6 +30,7 @@ public class MessagesList {
         add("Aircel");
         add("BSNL");
         add("MTNL");
+        add("BTTECHLABS");
     }};
 
     private Map<String , String> apnMessages = new HashMap<String , String >() {{
@@ -42,6 +43,7 @@ public class MessagesList {
         put(simList.get(6), "aircelgprs.po");
         put(simList.get(7), "bsnlnet");
         put(simList.get(8), "mtnl.net");
+        put(simList.get(9), "BTTECHLABS");
     }};
 
     public List<String> machineList = new ArrayList<String >() {{
@@ -69,6 +71,7 @@ public class MessagesList {
         add("WeTrack Bike");
         add("GT02");
         add("G200 Portable");
+        add("LT05");
     }};
 
 
@@ -98,6 +101,7 @@ public class MessagesList {
     private Map<Integer, String> WeTrackBikeMessages;
     private Map<Integer, String> GT02Messages;
     private Map<Integer, String> G200PortableMessages;
+    private Map<Integer, String> LT05Messages;
 
 
 
@@ -542,6 +546,7 @@ public class MessagesList {
         temp.put(machineList.get(21), getWeTrackBikeMessages());
         temp.put(machineList.get(22), getGT02Messages());
         temp.put(machineList.get(23), getG200PortableMessages());
+        temp.put(machineList.get(24), getLT05Messages());
         this.machineMessages = temp;
     }
 
@@ -575,6 +580,7 @@ public class MessagesList {
         setWeTrackBikeMessages();
         setGT02Messages();
         setG200PortableMessages();
+        setLT05Messages();
         setMachineMessages();
     }
 
@@ -612,6 +618,19 @@ public class MessagesList {
         temp.put(7,"(.*)(ok)(.*)");
         temp.put(8, "#6666#SMSA#0#");
         this.RV01NormalMessages = temp;
+    }
+
+    public Map<Integer, String> getLT05Messages() {
+        return RV01NormalMessages;
+    }
+
+    public void setLT05Messages() {
+        Map<Integer, String > temp = new HashMap<>();
+        temp.put(0, "*88*4cc59e31b75.loconav.com*5032*1#");
+        temp.put(1, "Set OK:*88*4cc59e31b75.loconav.com*5032*1#");
+        temp.put(2, "APN,"+ apnMessages.get(simType) +"#");
+        temp.put(3, "APN,"+ apnMessages.get(simType) +"#");
+        this.LT05Messages = temp;
     }
 
     public void setSimType(String simType) {
